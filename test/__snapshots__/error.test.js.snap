@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`marks spinner as error 1`] = `
+"[1G[33m⠋[39m #error[1G[33m⠙[39m #error[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
+"
+`;
+
+exports[`marks spinner as error with mark 1`] = `
+"[1G[33m⠋[39m #error[1G[33m⠙[39m #error[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
+[1G[33m⠋[39m #error[1G[33m⠙[39m #error[1G[33m⠹[39m #error[2K[1G[32m✔[39m Error
+
+[1G[33m⠋[39m #error[1G[33m⠙[39m #error[1G[33m⠹[39m #error[2K[1G[32m✔[39m #error
+"
+`;
+
+exports[`marks spinner as error with message 1`] = `
+"[1G[33m⠋[39m #error[1G[33m⠙[39m #error[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
+[1G[33m⠋[39m #error[1G[33m⠙[39m #error[1G[33m⠹[39m #error[2K[1G[32m✔[39m Error
+
+"
+`;
