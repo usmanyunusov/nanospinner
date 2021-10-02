@@ -1,6 +1,6 @@
 {
   "name": "nanospinner",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple and tiny multi spinner library for Node.js",
   "keywords": [
     "cli",
