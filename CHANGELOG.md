@@ -1,11 +1,20 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.8
+* Fix Clean docs
+
+## 0.1.7
+* Fixed types in package.json
+
+## 0.1.6
+* Removed multi in docs
+
 ## 0.1.5
-* Removed test.js
+* Removed test. file
 
 ## 0.1.4
-* Remove newline in createSpinner
+* Refactoring createSpinner
 
 ## 0.1.3
 * Typo: change size test result
