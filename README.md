@@ -139,3 +139,6 @@ nanospinner    1.930 ms
   spinner.reset()
   ```
 </details>
+
+## Roadmap
+- [ ] Multi spinners
