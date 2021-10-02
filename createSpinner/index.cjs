@@ -23,7 +23,6 @@ function createSpinner(text = '', opts = {}) {
 
       clear && stream.write(`\x1b[1G`)
       stream.write(`${str}`)
-
       return spinner
     },
 
@@ -37,7 +36,6 @@ function createSpinner(text = '', opts = {}) {
     spin() {
       spinner.render()
       current = (current + 1) % spinner.frames.length
-
       return spinner
     },
 
@@ -59,7 +57,6 @@ function createSpinner(text = '', opts = {}) {
       spinner.write(`\x1b[2K\x1b[1G`)
       spinner.write(`${mark} ${text}\n`)
       spinner.isTTY && spinner.write(`\x1b[?25h`)
-
       clearTimeout(timer)
       return spinner
     },
