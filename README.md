@@ -1,6 +1,6 @@
 # Nano Spinner
 
-Simple and tiny multi spinner library for Node.js
+Simple and tiny spinner library for Node.js
 
 - It takes **18 times less** space in node_modules than `ora`.
 - It is **6 times faster** than `mico-spinner`.
