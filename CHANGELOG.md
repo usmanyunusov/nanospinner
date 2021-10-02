@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.5
+* Removed test.js
+
 ## 0.1.4
 * Remove newline in createSpinner
 
