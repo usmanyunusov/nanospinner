@@ -1,6 +1,6 @@
 {
   "name": "nanospinner",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple and tiny multi spinner library for Node.js",
   "keywords": [
     "cli",
@@ -35,7 +35,8 @@
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
-    "lint": "prettier --write '*.{js,ts,cjs,}'"
+    "lint": "prettier --write '*.{js,ts,cjs,}'",
+    "publish": "clean-publish"
   },
   "dependencies": {
     "nanocolors": "^0.2.12"
@@ -43,7 +44,7 @@
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@types/jest": "^27.0.2",
-    "clean-publish": "^2.2.0",
+    "clean-publish": "3.0.3",
     "jest": "^27.2.4",
     "mico-spinner": "^1.3.0",
     "ora": "^6.0.1",
