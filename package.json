@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": "usmanyunusov/nanospinner",
   "type": "module",
-  "types": "index.d.ts",
+  "types": "./index.d.ts",
   "main": "index.cjs",
   "module": "index.js",
   "exports": {
