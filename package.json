@@ -23,8 +23,8 @@
   "repository": "usmanyunusov/nanospinner",
   "type": "module",
   "types": "./index.d.ts",
-  "main": "index.cjs",
-  "module": "index.js",
+  "main": "./index.cjs",
+  "module": "./index.js",
   "exports": {
     ".": {
       "require": "./index.cjs",
@@ -35,7 +35,7 @@
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
-    "lint": "prettier --write '*.{js,ts,cjs,}'",
+    "lint": "prettier --write '*.{js,ts,cjs}'",
     "publish": "clean-publish"
   },
   "dependencies": {
