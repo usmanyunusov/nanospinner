@@ -1,5 +1,5 @@
 import { green, red, yellow } from 'nanocolors'
-import { isInteractive, symbols } from '../constants/index.js'
+import { isTTY, symbols } from '../constants/index.js'
 
 export function createSpinner(text = '', opts = {}) {
   let { stream = process.stderr } = opts
@@ -10,7 +10,7 @@ export function createSpinner(text = '', opts = {}) {
     text,
     interval: opts.interval || 25,
     frames: opts.frames || symbols.frames,
-    isTTY: stream && stream.isTTY,
+    isTTY,
 
     reset() {
       current = 0
@@ -18,7 +18,7 @@ export function createSpinner(text = '', opts = {}) {
     },
 
     write(str, clear = false) {
-      if (!isInteractive) return
+      if (!isTTY) return
 
       clear && stream.write(`\x1b[1G`)
       stream.write(`${str}`)

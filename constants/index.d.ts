@@ -4,6 +4,5 @@ type Symbols = {
     cross: string
 }
 
-export const isUnicodSupport: boolean
-export const isInteractive: boolean
+export const isTTY: boolean
 export const symbols: Symbols

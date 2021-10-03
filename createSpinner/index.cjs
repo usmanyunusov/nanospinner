@@ -1,5 +1,5 @@
 const { green, red, yellow } = require('nanocolors')
-const { isInteractive, symbols } = require('../constants/index.cjs')
+const { isTTY, symbols } = require('../constants/index.cjs')
 
 function createSpinner(text = '', opts = {}) {
   let { stream = process.stderr } = opts
@@ -7,11 +7,10 @@ function createSpinner(text = '', opts = {}) {
     timer
 
   let spinner = {
-    ...opts,
     text,
-    interval: 25,
-    frames: symbols.frames,
-    isTTY: stream && stream.isTTY,
+    interval: opts.interval || 25,
+    frames: opts.frames || symbols.frames,
+    isTTY,
 
     reset() {
       current = 0
@@ -19,7 +18,7 @@ function createSpinner(text = '', opts = {}) {
     },
 
     write(str, clear = false) {
-      if (!isInteractive) return
+      if (!isTTY) return
 
       clear && stream.write(`\x1b[1G`)
       stream.write(`${str}`)
