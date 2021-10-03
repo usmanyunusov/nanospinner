@@ -13,6 +13,7 @@ type Spinner = {
   text: string
   frames: string[]
   interval: number
+  state: string
 
   reset(): Spinner
   spin(): Spinner

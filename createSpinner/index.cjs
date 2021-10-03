@@ -8,13 +8,15 @@ function createSpinner(text = '', opts = {}) {
 
   let spinner = {
     text,
-    interval: opts.interval || 25,
-    frames: opts.frames || symbols.frames,
     isTTY,
+    state: 'stopped',
+    frames: opts.frames || symbols.frames,
+    interval: opts.interval || 25,
 
     reset() {
       current = 0
       timer = null
+      spinner.state = 'stopped'
     },
 
     write(str, clear = false) {
@@ -35,6 +37,7 @@ function createSpinner(text = '', opts = {}) {
     spin() {
       spinner.render()
       current = (current + 1) % spinner.frames.length
+      spinner.state = 'spinning'
       return spinner
     },
 
@@ -57,6 +60,7 @@ function createSpinner(text = '', opts = {}) {
       spinner.write(`${mark} ${text}\n`)
       spinner.isTTY && spinner.write(`\x1b[?25h`)
       clearTimeout(timer)
+      spinner.state = 'stopped'
       return spinner
     },
 
