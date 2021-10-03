@@ -1,6 +1,19 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.12
+* Add state to api
+
+## 0.1.11
+* Replace isInteractive to isTTY
+* Change snapshots
+
+## 0.1.10
+* Fix export cjs
+
+## 0.1.9
+* Fix main and module urls
+
 ## 0.1.8
 * Fix Clean docs
 
