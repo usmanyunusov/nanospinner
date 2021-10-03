@@ -35,8 +35,7 @@
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
-    "lint": "prettier --write '*.{js,ts,cjs}'",
-    "publish": "clean-publish"
+    "lint": "prettier --write '*.{js,ts,cjs}'"
   },
   "dependencies": {
     "nanocolors": "^0.2.12"
