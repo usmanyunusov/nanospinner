@@ -77,7 +77,7 @@ nanospinner    1.930 ms
   <summary>
     <b>
       <code>
-        stop()
+        stop(opts)
       </code>
     </b>
   </summary>
@@ -86,7 +86,7 @@ nanospinner    1.930 ms
 
   ```js
   spinner.stop()
-  spinner.stop('Done!')
+  spinner.stop({ text: 'Done!' })
   ```
 </details>
 
@@ -94,7 +94,7 @@ nanospinner    1.930 ms
   <summary>
     <b>
       <code>
-        success()
+        success(opts)
       </code>
     </b>
   </summary>
@@ -103,7 +103,7 @@ nanospinner    1.930 ms
 
   ```js
   spinner.success()
-  spinner.success('Successful!')
+  spinner.success({ text: 'Successful!' })
   ```
 </details>
 
@@ -111,7 +111,7 @@ nanospinner    1.930 ms
   <summary>
     <b>
       <code>
-        error()
+        error(opts)
       </code>
     </b>
   </summary>
@@ -120,7 +120,7 @@ nanospinner    1.930 ms
 
   ```js
   spinner.error()
-  spinner.error('Error!')
+  spinner.error({ text: 'Error!' })
   ```
 </details>
 
