@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`doesn't reprint stop message 1`] = `
+"[?25l[1G[33m⠋[39m #stop[?25l[1G[33m⠙[39m #stop[?25l[1G[33m⠹[39m #stop[2K[1G[33m⠸[39m #stop
+[?25h"
+`;
+
+exports[`stops after 2 spins and prints stop message 1`] = `
+"[?25l[1G[33m⠋[39m #stop[?25l[1G[33m⠙[39m #stop[?25l[1G[33m⠹[39m #stop[2K[1G[33m⠸[39m #stop
+[?25h[?25l[1G[33m⠋[39m #stop[?25l[1G[33m⠙[39m #stop[2K[1G[33m⠹[39m Done!
+
+[?25h"
+`;

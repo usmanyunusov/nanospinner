@@ -1,4 +1,4 @@
-type Symbols = {
+interface Symbols {
     frames: string[]
     tick: string
     cross: string

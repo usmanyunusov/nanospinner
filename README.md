@@ -33,8 +33,8 @@ Library loading time:
 
 ```
 $ ./test/loading.js
-mico-spinner  13.014 ms
-nanospinner    1.930 ms
+mico-spinner  15.451 ms
+nanospinner    1.551 ms
 ```
 
 ## API

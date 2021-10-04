@@ -15,5 +15,5 @@ let micospinner = require('mico-spinner')
 showTime('mico-spinner')
 
 before = performance.now()
-let { createSpinner } = require('../index.cjs')
+let { createSpinner } = require('../index.js')
 showTime('nanospinner')

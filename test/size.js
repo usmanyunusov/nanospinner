@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-import { bold, gray } from 'nanocolors'
-import { get } from 'https'
+let { bold, gray } = require("picocolors")
+let { get } = require("https")
+
 
 async function getJSON(url) {
   return new Promise(resolve => {

@@ -1,6 +1,6 @@
 {
   "name": "nanospinner",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Simple and tiny spinner library for Node.js",
   "keywords": [
     "cli",
@@ -21,24 +21,14 @@
   "author": "Usman Yunusov <usman.iunusov@gmail.com>",
   "license": "MIT",
   "repository": "usmanyunusov/nanospinner",
-  "type": "module",
   "types": "./index.d.ts",
-  "main": "./index.cjs",
-  "module": "./index.js",
-  "exports": {
-    ".": {
-      "require": "./index.cjs",
-      "import": "./index.js",
-      "default": "./index.js"
-    },
-    "./package.json": "./package.json"
-  },
+  "main": "./index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
-    "lint": "prettier --write '*.{js,ts,cjs}'"
+    "lint": "prettier --write '*.{js,ts}'"
   },
   "dependencies": {
-    "nanocolors": "^0.2.12"
+    "picocolors": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

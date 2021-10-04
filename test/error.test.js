@@ -1,4 +1,4 @@
-import { createSpinner } from '../index.js'
+let { createSpinner } = require("../index.js")
 
 let stdout = { out: '' }
 stdout.write = symbols => {

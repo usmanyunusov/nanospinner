@@ -1,6 +1,12 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.13
+* Refactoring
+* Remove state to api
+* Removed ESM Module
+* Add stop and reset test
+
 ## 0.1.12
 * Add state to api
 
