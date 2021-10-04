@@ -1,4 +1,4 @@
-let { createSpinner } = require("../index.js")
+let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
 stdout.write = symbols => {
@@ -6,11 +6,11 @@ stdout.write = symbols => {
 }
 
 it('uses custom frames', () => {
-  let spinner = createSpinner('', { stream: stdout })
-  spinner.frames = ['.', 'o', '0', '@', '*']
+  let spinner = createSpinner('#update', { stream: stdout })
 
   spinner.spin()
   spinner.spin()
+  spinner.update({ frames: ['.', 'o', '0', '@', '*'], text: 'Change update' })
   spinner.spin()
   spinner.spin()
   spinner.spin()

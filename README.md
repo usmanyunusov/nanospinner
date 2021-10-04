@@ -48,13 +48,14 @@ nanospinner    1.551 ms
     </b>
   </summary>
 
-  Looping over `spin` method will animate a given spinner.
+Looping over `spin` method will animate a given spinner.
 
-  ```js
-  setInterval(() => {
-    spinner.spin()
-  }, 25)
-  ```
+```js
+setInterval(() => {
+  spinner.spin()
+}, 25)
+```
+
 </details>
 
 <details>
@@ -66,11 +67,12 @@ nanospinner    1.551 ms
     </b>
   </summary>
 
-  In order to start the spinner call `start`. This will perform drawing the spinning animation
+In order to start the spinner call `start`. This will perform drawing the spinning animation
 
-  ```js
-  spinner.start()
-  ```
+```js
+spinner.start()
+```
+
 </details>
 
 <details>
@@ -82,12 +84,13 @@ nanospinner    1.551 ms
     </b>
   </summary>
 
-  In order to stop the spinner call `stop`. This will finish drawing the spinning animation and return to new line.
+In order to stop the spinner call `stop`. This will finish drawing the spinning animation and return to new line.
 
-  ```js
-  spinner.stop()
-  spinner.stop({ text: 'Done!' })
-  ```
+```js
+spinner.stop()
+spinner.stop({ text: 'Done!', mark: ':O' })
+```
+
 </details>
 
 <details>
@@ -99,12 +102,13 @@ nanospinner    1.551 ms
     </b>
   </summary>
 
-  Use `success` call to stop the spinning animation and replace the spinning symbol with check mark character to indicate successful completion.
+Use `success` call to stop the spinning animation and replace the spinning symbol with check mark character to indicate successful completion.
 
-  ```js
-  spinner.success()
-  spinner.success({ text: 'Successful!' })
-  ```
+```js
+spinner.success()
+spinner.success({ text: 'Successful!', mark: ':)' })
+```
+
 </details>
 
 <details>
@@ -116,12 +120,35 @@ nanospinner    1.551 ms
     </b>
   </summary>
 
-  Use `error` call to stop the spinning animation and replace the spinning symbol with cross character to indicate error completion.
+Use `error` call to stop the spinning animation and replace the spinning symbol with cross character to indicate error completion.
 
-  ```js
-  spinner.error()
-  spinner.error({ text: 'Error!' })
-  ```
+```js
+spinner.error()
+spinner.error({ text: 'Error!', mark: ':(' })
+```
+
+</details>
+
+<details>
+  <summary>
+    <b>
+      <code>
+        update(opts)
+      </code>
+    </b>
+  </summary>
+
+Use `update` call to dynamically change
+
+```js
+spinner.update({
+  text: 'Run test',
+  stream: stream.stdout,
+  frames: ['.', 'o', '0', '@', '*'],
+  interval: 100
+})
+```
+
 </details>
 
 <details>
@@ -133,12 +160,14 @@ nanospinner    1.551 ms
     </b>
   </summary>
 
-  In order to reset the spinner to its initial frame do:
+In order to reset the spinner to its initial frame do:
 
-  ```js
-  spinner.reset()
-  ```
+```js
+spinner.reset()
+```
+
 </details>
 
 ## Roadmap
+
 - [ ] Multi spinners

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`uses custom frames 1`] = `"[?25l[1G[33m⠋[39m #update[?25l[1G[33m⠙[39m #update[?25l[1G[33m0[39m Change update[?25l[1G[33m@[39m Change update[?25l[1G[33m*[39m Change update"`;

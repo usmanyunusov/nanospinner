@@ -2,17 +2,14 @@ let { green, red, yellow } = require('picocolors')
 let { isTTY, symbols } = require('./consts.js')
 
 function createSpinner(text = '', opts = {}) {
-  let { stream = process.stderr } = opts
   let current = 0,
+    interval = opts.interval || 25,
+    stream = opts.stream || process.stderr,
+    frames = opts.frames || symbols.frames,
     state = 'stopped',
     timer
 
   let spinner = {
-    text,
-    isTTY,
-    frames: opts.frames || symbols.frames,
-    interval: opts.interval || 25,
-
     reset() {
       current = 0
       timer = null
@@ -28,22 +25,28 @@ function createSpinner(text = '', opts = {}) {
     },
 
     render() {
-      let frame = spinner.frames[current]
-      let str = `${yellow(frame)} ${spinner.text}`
-      spinner.isTTY && spinner.write(`\x1b[?25l`)
+      let str = `${yellow(frames[current])} ${text}`
+      isTTY && spinner.write(`\x1b[?25l`)
       spinner.write(str, true)
     },
 
     spin() {
       spinner.render()
-      current = (current + 1) % spinner.frames.length
+      current = (current + 1) % frames.length
       state = 'spinning'
+      return spinner
+    },
+
+    update(opts = {}) {
+      opts.text && (text = opts.text)
+      opts.frames && (frames = opts.frames)
+      opts.interval && (interval = opts.interval)
       return spinner
     },
 
     loop() {
       spinner.spin()
-      timer = setTimeout(() => spinner.loop(), spinner.interval)
+      timer = setTimeout(() => spinner.loop(), interval)
     },
 
     start() {
@@ -53,22 +56,23 @@ function createSpinner(text = '', opts = {}) {
     },
 
     stop(opts = {}) {
-      let frame = spinner.frames[current]
-      let { mark = yellow(frame), text = spinner.text } = opts
+      let mark = opts.mark || yellow(frames[current])
 
+      spinner.update({ text: opts.text || text })
       spinner.write(`\x1b[2K\x1b[1G`)
       spinner.write(`${mark} ${text}\n`)
-      spinner.isTTY && spinner.write(`\x1b[?25h`)
+
+      isTTY && spinner.write(`\x1b[?25h`)
       clearTimeout(timer)
       state = 'stopped'
       return spinner
     },
 
-    success(opts) {
+    success(opts = {}) {
       return spinner.stop({ ...opts, mark: green(symbols.tick) })
     },
 
-    error(opts) {
+    error(opts = {}) {
       return spinner.stop({ ...opts, mark: red(symbols.cross) })
     }
   }
