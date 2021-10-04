@@ -27,6 +27,10 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+        env:
+          NODE_ENV: production
       - name: Run demo
         run: node ./test/demo.js
   full:
