@@ -17,8 +17,6 @@ function createSpinner(text = '', opts = {}) {
     },
 
     write(str, clear = false) {
-      if (!isTTY) return
-
       clear && stream.write(`\x1b[1G`)
       stream.write(`${str}`)
       return spinner
@@ -51,7 +49,7 @@ function createSpinner(text = '', opts = {}) {
 
     start() {
       spinner.reset()
-      spinner.loop()
+      isTTY ? spinner.loop() : spinner.spin()
       return spinner
     },
 
