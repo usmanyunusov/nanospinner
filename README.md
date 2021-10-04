@@ -26,7 +26,7 @@ Data from packagephobia.com
 ora           597 kB
 cli-spinners   28 kB
 mico-spinner   28 kB
-nanospinner    25 kB
+nanospinner    13 kB
 ```
 
 Library loading time:
