@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2
+* Added CI support
+
 ## 0.1.15
 * Added update to api
 
