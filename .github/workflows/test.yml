@@ -5,17 +5,33 @@ on:
 env:
   FORCE_COLOR: 2
 jobs:
+  benchmark:
+    name: Benchmark
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Loading benchmark
+        run: node ./test/loading.js
+      - name: Size benchmark
+        run: node ./test/loading.js
   demo:
     name: CI Spinner Demo
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
       - name: Run demo
         run: node ./test/demo.js
   full:
     name: Node.js 16 Full
     runs-on: ubuntu-latest
-    env:
-      CI:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -29,8 +45,6 @@ jobs:
         run: yarn test
   short:
     runs-on: ubuntu-latest
-    env:
-      CI:
     strategy:
       matrix:
         node-version:

@@ -1,3 +1,5 @@
+delete process.env.CI
+
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -7,7 +9,7 @@ stdout.write = symbols => {
 
 it(`spins default frames`, () => {
   let spinner = createSpinner('#reset', { stream: stdout })
-  
+
   spinner.spin()
   spinner.spin()
   spinner.spin()

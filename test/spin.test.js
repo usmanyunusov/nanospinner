@@ -1,4 +1,6 @@
-let { createSpinner } = require("../index.js")
+delete process.env.CI
+
+let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
 stdout.write = symbols => {
