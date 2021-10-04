@@ -24,7 +24,7 @@
   "types": "./index.d.ts",
   "main": "./index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
+    "test": "jest --coverage",
     "lint": "prettier --write '*.{js,ts}'"
   },
   "dependencies": {

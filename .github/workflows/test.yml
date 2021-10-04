@@ -39,4 +39,4 @@ jobs:
         with:
           install-command: yarn --frozen-lockfile --ignore-engines
       - name: Run unit tests
-        run: node --experimental-vm-modules node_modules/.bin/jest
+        run: npx jest
