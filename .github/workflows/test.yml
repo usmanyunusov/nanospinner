@@ -5,9 +5,17 @@ on:
 env:
   FORCE_COLOR: 2
 jobs:
+  demo:
+    name: CI Spinner Demo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run demo
+        run: node ./test/demo.js
   full:
     name: Node.js 16 Full
     runs-on: ubuntu-latest
+    env:
+      CI:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -19,10 +27,10 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: Run tests
         run: yarn test
-      - name: Run demo
-        run: node ./test/demo.js
   short:
     runs-on: ubuntu-latest
+    env:
+      CI:
     strategy:
       matrix:
         node-version:
