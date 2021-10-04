@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.1.14
+* Fix clean publish
+
 ## 0.1.13
 * Refactoring
 * Remove state to api
