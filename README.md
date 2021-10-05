@@ -12,7 +12,7 @@ let spinner = createSpinner('Run test')
 
 spinner.start()
 setTimeout(() => {
-  spinner.success()asdsad
+  spinner.success()
 }, 1000)
 ```
 
