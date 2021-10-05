@@ -20,7 +20,7 @@ jobs:
       - name: Loading benchmark
         run: node ./test/loading.js
       - name: Size benchmark
-        run: node ./test/loading.js
+        run: node ./test/size.js
   demo:
     name: CI Spinner Demo
     runs-on: ubuntu-latest
