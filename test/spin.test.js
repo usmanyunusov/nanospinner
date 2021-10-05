@@ -1,5 +1,3 @@
-delete process.env.CI
-
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -21,5 +19,19 @@ it('spins default frames', () => {
   spinner.spin()
   spinner.spin()
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `"[?25l[1G[33m⠋[39m [?25l[1G[33m⠙[39m [?25l[1G[33m⠹[39m [?25l[1G[33m⠸[39m [?25l[1G[33m⠼[39m [?25l[1G[33m⠴[39m [?25l[1G[33m⠦[39m [?25l[1G[33m⠧[39m [?25l[1G[33m⠇[39m [?25l[1G[33m⠏[39m "`
+  let snapCI = `
+    "[1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    [1G[33m-[39m 
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })

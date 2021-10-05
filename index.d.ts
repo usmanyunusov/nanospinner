@@ -21,4 +21,3 @@ interface Spinner {
 }
 
 export function createSpinner(text?: string, opts?: Options): Spinner
-  
