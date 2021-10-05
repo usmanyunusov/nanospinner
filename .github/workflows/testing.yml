@@ -15,8 +15,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
+          cache: yarn
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install --frozen-lockfile
       - name: Loading benchmark
         run: node ./test/loading.js
       - name: Size benchmark
@@ -27,10 +28,13 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: yarn
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        env:
-          NODE_ENV: production
+        run: yarn install --frozen-lockfile --production
       - name: Run demo
         run: node ./test/demo.js
   full:
@@ -43,8 +47,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
+          cache: yarn
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install --frozen-lockfile
       - name: Run tests
         run: yarn test
   short:
@@ -62,9 +67,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          cache: yarb
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          install-command: yarn --frozen-lockfile --ignore-engines
+        run: yarn install --frozen-lockfile --ignore-engines
       - name: Run unit tests
         run: npx jest
