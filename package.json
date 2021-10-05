@@ -48,7 +48,7 @@
     "testEnvironment": "node",
     "coverageThreshold": {
       "global": {
-        "statements": 100
+        "statements": 90
       }
     }
   },
