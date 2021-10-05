@@ -1,7 +1,9 @@
-name: Test
+name: Testing
 on:
   push:
+    branches: [ master ]
   pull_request:
+    branches: [ master ]
 env:
   FORCE_COLOR: 2
 jobs:

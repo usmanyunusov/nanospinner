@@ -45,12 +45,7 @@
     "cleanDocs": true
   },
   "jest": {
-    "testEnvironment": "node",
-    "coverageThreshold": {
-      "global": {
-        "statements": 90
-      }
-    }
+    "testEnvironment": "node"
   },
   "prettier": {
     "arrowParens": "avoid",
