@@ -15,5 +15,14 @@ it('uses custom frames', () => {
   spinner.spin()
   spinner.spin()
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `"[?25l[1G[33m⠋[39m #update[?25l[1G[33m⠙[39m #update[?25l[1G[33m0[39m Change update[?25l[1G[33m@[39m Change update[?25l[1G[33m*[39m Change update"`;
+  let snapCI = `
+    "[1G[33m-[39m #update
+    [1G[33m-[39m #update
+    [1G[33m.[39m Change update
+    [1G[33mo[39m Change update
+    [1G[33m0[39m Change update
+    "
+  `;
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
