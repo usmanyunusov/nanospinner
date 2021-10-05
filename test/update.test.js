@@ -1,5 +1,3 @@
-delete process.env.CI
-
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -26,5 +24,6 @@ it('uses custom frames', () => {
     [1G[33m0[39m Change update
     "
   `;
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  // expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  expect(stdout.out).toMatchSnapshot()
 })
