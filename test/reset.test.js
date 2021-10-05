@@ -7,7 +7,7 @@ stdout.write = symbols => {
 
 it(`spins default frames`, () => {
   let spinner = createSpinner('#reset', { stream: stdout })
-  
+
   spinner.spin()
   spinner.spin()
   spinner.spin()
@@ -15,5 +15,14 @@ it(`spins default frames`, () => {
   spinner.spin()
   spinner.spin()
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `"[?25l[1G[33m⠋[39m #reset[?25l[1G[33m⠙[39m #reset[?25l[1G[33m⠹[39m #reset[?25l[1G[33m⠋[39m #reset[?25l[1G[33m⠙[39m #reset"`
+  let snapCI = `
+    "[1G[33m-[39m #reset
+    [1G[33m-[39m #reset
+    [1G[33m-[39m #reset
+    [1G[33m-[39m #reset
+    [1G[33m-[39m #reset
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })

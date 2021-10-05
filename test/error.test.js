@@ -1,4 +1,4 @@
-let { createSpinner } = require("../index.js")
+let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
 stdout.write = symbols => {
@@ -13,7 +13,18 @@ it('marks spinner as error', () => {
   spinner.spin()
   spinner.error()
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
+    [?25h"
+  `
+  let snapCI = `
+    "[1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [2K[1G[31m✖[39m #error
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it('marks spinner as error with message', () => {
@@ -24,7 +35,25 @@ it('marks spinner as error with message', () => {
   spinner.spin()
   spinner.success({ text: 'Error\n' })
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
+    [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[32m✔[39m Error
+
+    [?25h"
+  `
+  let snapCI = `
+    "[1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [2K[1G[31m✖[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [2K[1G[32m✔[39m Error
+
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it('marks spinner as error with mark', () => {
@@ -35,5 +64,28 @@ it('marks spinner as error with mark', () => {
   spinner.spin()
   spinner.success({ mark: '!' })
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
+    [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[32m✔[39m Error
+
+    [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G! #error
+    [?25h"
+  `
+  let snapCI = `
+    "[1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [2K[1G[31m✖[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [2K[1G[32m✔[39m Error
+
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [1G[33m-[39m #error
+    [2K[1G! #error
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })

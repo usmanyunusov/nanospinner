@@ -13,7 +13,18 @@ it(`doesn't reprint stop message`, () => {
   spinner.spin()
   spinner.stop()
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `
+  "[?25l[1G[33m⠋[39m #stop[?25l[1G[33m⠙[39m #stop[?25l[1G[33m⠹[39m #stop[2K[1G[33m⠸[39m #stop
+  [?25h"
+  `
+  let snapCI = `
+  "[1G[33m-[39m #stop
+  [1G[33m-[39m #stop
+  [1G[33m-[39m #stop
+  [2K[1G[33m-[39m #stop
+  "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it('stops after 2 spins and prints stop message', () => {
@@ -23,5 +34,22 @@ it('stops after 2 spins and prints stop message', () => {
   spinner.spin()
   spinner.stop({ text: 'Done!\n' })
 
-  expect(stdout.out).toMatchSnapshot()
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #stop[?25l[1G[33m⠙[39m #stop[?25l[1G[33m⠹[39m #stop[2K[1G[33m⠸[39m #stop
+    [?25h[?25l[1G[33m⠋[39m #stop[?25l[1G[33m⠙[39m #stop[2K[1G[33m⠹[39m Done!
+
+    [?25h"
+  `
+  let snapCI = `
+    "[1G[33m-[39m #stop
+    [1G[33m-[39m #stop
+    [1G[33m-[39m #stop
+    [2K[1G[33m-[39m #stop
+    [1G[33m-[39m #stop
+    [1G[33m-[39m #stop
+    [2K[1G[33m-[39m Done!
+
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
