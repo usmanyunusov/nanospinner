@@ -1,7 +1,7 @@
 interface Symbols {
-    frames: string[]
-    tick: string
-    cross: string
+  frames: string[]
+  tick: string
+  cross: string
 }
 
 export const isTTY: boolean

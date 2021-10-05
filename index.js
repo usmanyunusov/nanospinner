@@ -6,14 +6,12 @@ function createSpinner(text = '', opts = {}) {
     interval = opts.interval || 25,
     stream = opts.stream || process.stderr,
     frames = opts.frames || symbols.frames,
-    state = 'stopped',
     timer
 
   let spinner = {
     reset() {
       current = 0
       timer = null
-      state = 'stopped'
     },
 
     write(str, clear = false) {
@@ -24,14 +22,13 @@ function createSpinner(text = '', opts = {}) {
 
     render() {
       let str = `${yellow(frames[current])} ${text}`
-      isTTY && spinner.write(`\x1b[?25l`)
+      isTTY ? spinner.write(`\x1b[?25l`) : (str += '\n')
       spinner.write(str, true)
     },
 
     spin() {
       spinner.render()
-      current = (current + 1) % frames.length
-      state = 'spinning'
+      current = ++current % frames.length
       return spinner
     },
 
@@ -44,34 +41,40 @@ function createSpinner(text = '', opts = {}) {
 
     loop() {
       spinner.spin()
-      timer = setTimeout(() => spinner.loop(), interval)
+      timer = setTimeout(() => isTTY && spinner.loop(), interval)
     },
 
     start() {
+      if (timer) return spinner
+
       spinner.reset()
-      isTTY ? spinner.loop() : spinner.spin()
+      spinner.loop()
+
+      process.on('SIGINT', () => {
+        spinner.stop()
+        process.exit()
+      })
+
       return spinner
     },
 
     stop(opts = {}) {
       let mark = opts.mark || yellow(frames[current])
 
+      timer = clearTimeout(timer)
       spinner.update({ text: opts.text || text })
       spinner.write(`\x1b[2K\x1b[1G`)
       spinner.write(`${mark} ${text}\n`)
-
       isTTY && spinner.write(`\x1b[?25h`)
-      clearTimeout(timer)
-      state = 'stopped'
       return spinner
     },
 
     success(opts = {}) {
-      return spinner.stop({ ...opts, mark: green(symbols.tick) })
+      return spinner.stop({ mark: green(symbols.tick), ...opts })
     },
 
     error(opts = {}) {
-      return spinner.stop({ ...opts, mark: red(symbols.cross) })
+      return spinner.stop({ mark: red(symbols.cross), ...opts })
     }
   }
 
