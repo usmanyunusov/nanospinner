@@ -1,3 +1,5 @@
+delete process.env.CI
+
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
