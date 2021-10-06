@@ -71,7 +71,7 @@ In order to start the spinner call `start`. This will perform drawing the spinni
 
 ```js
 spinner.start()
-spinner.stop({ text: 'Start' })
+spinner.start({ text: 'Start' })
 ```
 
 </details>
