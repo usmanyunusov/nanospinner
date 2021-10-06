@@ -15,7 +15,7 @@ jobs:
           node-version: 16
           cache: yarn
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npx handpick --target=devDependencies --target=benchmarkDependencies
       - name: Loading benchmark
         run: node ./test/loading.js
       - name: Size benchmark
