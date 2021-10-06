@@ -44,10 +44,11 @@ function createSpinner(text = '', opts = {}) {
       timer = setTimeout(() => isTTY && spinner.loop(), interval)
     },
 
-    start() {
+    start(opts = {}) {
       if (timer) return spinner
 
       spinner.reset()
+      spinner.update({ text: opts.text || text })
       spinner.loop()
 
       process.on('SIGINT', () => {

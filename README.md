@@ -62,7 +62,7 @@ setInterval(() => {
   <summary>
     <b>
       <code>
-        start()
+        start(opts?)
       </code>
     </b>
   </summary>
@@ -71,6 +71,7 @@ In order to start the spinner call `start`. This will perform drawing the spinni
 
 ```js
 spinner.start()
+spinner.stop({ text: 'Start' })
 ```
 
 </details>
@@ -79,7 +80,7 @@ spinner.start()
   <summary>
     <b>
       <code>
-        stop(opts)
+        stop(opts?)
       </code>
     </b>
   </summary>
@@ -97,7 +98,7 @@ spinner.stop({ text: 'Done!', mark: ':O' })
   <summary>
     <b>
       <code>
-        success(opts)
+        success(opts?)
       </code>
     </b>
   </summary>
@@ -115,7 +116,7 @@ spinner.success({ text: 'Successful!', mark: ':)' })
   <summary>
     <b>
       <code>
-        error(opts)
+        error(opts?)
       </code>
     </b>
   </summary>
@@ -133,7 +134,7 @@ spinner.error({ text: 'Error!', mark: ':(' })
   <summary>
     <b>
       <code>
-        update(opts)
+        update(opts?)
       </code>
     </b>
   </summary>
