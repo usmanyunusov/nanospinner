@@ -5,7 +5,7 @@ The simplest and tiniest terminal spinner for Node.js
 ```js
 import { createSpinner } from 'nanospinner'
 
-let spinner = createSpinner('Run test').start()
+const spinner = createSpinner('Run test').start()
 
 setTimeout(() => {
   spinner.success()
@@ -25,7 +25,6 @@ The space in `node_modules` including sub-dependencies:
 $ ./test/size.js
 Data from packagephobia.com
 ora           597 kB
-mico-spinner   28 kB
 nanospinner    13 kB
 ```
 
@@ -143,7 +142,7 @@ Use `update` call to dynamically change
 ```js
 spinner.update({
   text: 'Run test',
-  stream: stream.stdout,
+  stream: process.stdout,
   frames: ['.', 'o', '0', '@', '*'],
   interval: 100
 })
