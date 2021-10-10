@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
-let { bold, gray } = require("picocolors")
-let { get } = require("https")
-
+let { bold, gray } = require('picocolors')
+let { get } = require('https')
 
 async function getJSON(url) {
   return new Promise(resolve => {
@@ -35,7 +34,6 @@ async function benchmark(lib) {
 async function start() {
   process.stdout.write(gray('Data from packagephobia.com\n'))
   await benchmark('ora')
-  await benchmark('cli-spinners')
   await benchmark('mico-spinner')
   await benchmark('nanospinner')
 }
