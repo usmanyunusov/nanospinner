@@ -1,20 +1,21 @@
 # Nano Spinner
 
-Simple and tiny spinner library for Node.js
-
-- It takes **40 times less** space in node_modules than `ora`.
-- It is **7 times faster** than `mico-spinner`.
+The simplest and tiniest terminal spinner for Node.js
 
 ```js
 import { createSpinner } from 'nanospinner'
 
-let spinner = createSpinner('Run test')
+let spinner = createSpinner('Run test').start()
 
-spinner.start()
 setTimeout(() => {
   spinner.success()
 }, 1000)
 ```
+
+- Only **single dependency** (picocolors).
+- It **~40 times** smaller and **~2 times** faster than `ora`.
+- Support both CJS and ESM projects.
+- TypeScript type declarations included.
 
 ## Benchmarks
 
@@ -24,7 +25,6 @@ The space in `node_modules` including sub-dependencies:
 $ ./test/size.js
 Data from packagephobia.com
 ora           597 kB
-cli-spinners   28 kB
 mico-spinner   28 kB
 nanospinner    13 kB
 ```
@@ -33,7 +33,6 @@ Library loading time:
 
 ```
 $ ./test/loading.js
-mico-spinner  15.451 ms
 nanospinner    1.551 ms
 ```
 
