@@ -11,7 +11,7 @@ function createSpinner(text = '', opts = {}) {
   let spinner = {
     reset() {
       current = 0
-      timer = null
+      timer = clearTimeout(timer)
     },
 
     write(str, clear = false) {
@@ -22,7 +22,7 @@ function createSpinner(text = '', opts = {}) {
 
     render() {
       let str = `${yellow(frames[current])} ${text}`
-      isTTY ? spinner.write(`\x1b[?25l`) : (str += '\n')
+      isTTY ? stream.write(`\x1b[?25l`) : (str += '\n')
       spinner.write(str, true)
     },
 
@@ -33,40 +33,31 @@ function createSpinner(text = '', opts = {}) {
     },
 
     update(opts = {}) {
-      opts.text && (text = opts.text)
-      opts.frames && (frames = opts.frames)
-      opts.interval && (interval = opts.interval)
+      text = opts.text || text
+      frames = opts.frames || frames
+      interval = opts.interval || interval
       return spinner
     },
 
     loop() {
       spinner.spin()
-      timer = setTimeout(() => isTTY && spinner.loop(), interval)
+      isTTY && (timer = setTimeout(() => spinner.loop(), interval))
     },
 
     start(opts = {}) {
-      if (timer) return spinner
-
-      spinner.reset()
-      spinner.update({ text: opts.text || text })
-      spinner.loop()
-
-      process.on('SIGINT', () => {
-        spinner.stop()
-        process.exit()
-      })
-
+      if (timer) spinner.reset()
+      spinner.update({ text: opts.text || text }).loop()
       return spinner
     },
 
     stop(opts = {}) {
-      let mark = opts.mark || yellow(frames[current])
-
+      opts.mark = opts.mark || yellow(frames[current])
       timer = clearTimeout(timer)
-      spinner.update({ text: opts.text || text })
-      spinner.write(`\x1b[2K\x1b[1G`)
-      spinner.write(`${mark} ${text}\n`)
-      isTTY && spinner.write(`\x1b[?25h`)
+      spinner
+        .update({ text: opts.text || text })
+        .write(`\x1b[2K\x1b[1G`)
+        .write(`${opts.mark} ${text}\n`)
+      isTTY && stream.write(`\x1b[?25h`)
       return spinner
     },
 
@@ -76,12 +67,12 @@ function createSpinner(text = '', opts = {}) {
 
     error(opts = {}) {
       return spinner.stop({ mark: red(symbols.cross), ...opts })
-    }
+    },
   }
 
   return spinner
 }
 
 module.exports = {
-  createSpinner
+  createSpinner,
 }

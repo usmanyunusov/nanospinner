@@ -19,7 +19,7 @@ const symbols = {
       : ['-', '\\', '|', '/']
     : ['-'],
   tick: isUnicodSupport ? '✔' : '√',
-  cross: isUnicodSupport ? '✖' : '×'
+  cross: isUnicodSupport ? '✖' : '×',
 }
 
 module.exports = { isTTY, symbols }
