@@ -9,14 +9,13 @@
     "terminal",
     "loading"
   ],
-  "author": "Usman Yunusov <usman.iunusov@gmail.com>",
-  "license": "MIT",
+  "author": "Usman Yunusov",
+  "license": "ISC",
   "repository": "usmanyunusov/nanospinner",
   "types": "./index.d.ts",
   "main": "./index.js",
   "scripts": {
-    "test": "jest --coverage",
-    "lint": "prettier --write '*.{js,ts}'"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "picocolors": "^0.2.0"
