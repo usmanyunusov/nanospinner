@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`uses custom frames: CI 1`] = `
+"[33m-[39m #update
+[33m-[39m #update
+[33m.[39m Change update
+[33mo[39m Change update
+[33m0[39m Change update
+"
+`;
+
+exports[`uses custom frames: Local 1`] = `"[?25l[1G[33m⠋[39m #update[?25l[1G[2K[1G[33m⠙[39m #update[?25l[1G[2K[1G[33m0[39m Change update[?25l[1G[2K[1G[33m@[39m Change update[?25l[1G[2K[1G[33m*[39m Change update"`;
