@@ -33,11 +33,11 @@ it('marks spinner as error with message', () => {
   spinner.spin()
   spinner.spin()
   spinner.spin()
-  spinner.success({ text: 'Error\n' })
+  spinner.error({ text: 'Error\n' })
 
   let snapLocal = `
     "[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
-    [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[32m✔[39m Error
+    [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[31m✖[39m Error
 
     [?25h"
   `
@@ -49,7 +49,7 @@ it('marks spinner as error with message', () => {
     [1G[33m-[39m #error
     [1G[33m-[39m #error
     [1G[33m-[39m #error
-    [2K[1G[32m✔[39m Error
+    [2K[1G[31m✖[39m Error
 
     "
   `
@@ -62,11 +62,11 @@ it('marks spinner as error with mark', () => {
   spinner.spin()
   spinner.spin()
   spinner.spin()
-  spinner.success({ mark: '!' })
+  spinner.error({ mark: '!' })
 
   let snapLocal = `
     "[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[31m✖[39m #error
-    [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[32m✔[39m Error
+    [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G[31m✖[39m Error
 
     [?25h[?25l[1G[33m⠋[39m #error[?25l[1G[33m⠙[39m #error[?25l[1G[33m⠹[39m #error[2K[1G! #error
     [?25h"
@@ -79,7 +79,7 @@ it('marks spinner as error with mark', () => {
     [1G[33m-[39m #error
     [1G[33m-[39m #error
     [1G[33m-[39m #error
-    [2K[1G[32m✔[39m Error
+    [2K[1G[31m✖[39m Error
 
     [1G[33m-[39m #error
     [1G[33m-[39m #error
