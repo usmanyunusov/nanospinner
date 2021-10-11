@@ -19,4 +19,9 @@ const symbols = {
   cross: isUTFSupport ? '✖' : '×',
 }
 
-module.exports = { isTTY, symbols }
+const RE_ANSI = /([\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><])/g
+function getLines(str, maxWidth = 80) {
+  return Math.ceil(str.replace(RE_ANSI, '').length / maxWidth)
+}
+
+module.exports = { isTTY, symbols, getLines }

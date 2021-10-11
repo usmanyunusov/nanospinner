@@ -1,21 +1,32 @@
 const { green, red, yellow } = require('picocolors')
-const { isTTY, symbols } = require('./consts')
+const { isTTY, symbols, getLines } = require('./consts')
 
 function createSpinner(text = '', opts = {}) {
   let current = 0,
     interval = opts.interval || 25,
     stream = opts.stream || process.stderr,
     frames = opts.frames || symbols.frames,
+    lines = 0,
     timer
 
   let spinner = {
     reset() {
       current = 0
+      lines = 0
       timer = clearTimeout(timer)
     },
 
     write(str, clear = false) {
-      stream.write(clear ? `\x1b[1G${str}` : str)
+      if (clear && isTTY) {
+        stream.write('\x1b[1G')
+        for (let index = 0; index < lines; index++) {
+          index > 0 && stream.write('\x1b[1A')
+          stream.write('\x1b[2K\x1b[1G')
+        }
+        lines = getLines(str, stream.columns)
+      }
+
+      stream.write(str)
       return spinner
     },
 
@@ -40,22 +51,20 @@ function createSpinner(text = '', opts = {}) {
     },
 
     loop() {
-      spinner.spin()
       isTTY && (timer = setTimeout(() => spinner.loop(), interval))
+      return spinner.spin()
     },
 
     start(opts = {}) {
       timer && spinner.reset()
-      spinner.update({ text: opts.text }).loop()
-      return spinner
+      return spinner.update({ text: opts.text }).loop()
     },
 
     stop(opts = {}) {
       timer = clearTimeout(timer)
 
       let mark = yellow(frames[current])
-      spinner.write(`\x1b[2K\x1b[1G`)
-      spinner.write(`${opts.mark || mark} ${opts.text || text}\n`)
+      spinner.write(`${opts.mark || mark} ${opts.text || text}\n`, true)
 
       return isTTY ? spinner.write(`\x1b[?25h`) : spinner
     },
