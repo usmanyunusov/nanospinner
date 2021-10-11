@@ -13,7 +13,7 @@ setTimeout(() => {
 ```
 
 - Only **single dependency** (picocolors).
-- It **~40 times** smaller and **~2 times** faster than `ora`.
+- It **~40 times** smaller than `ora`.
 - Support both CJS and ESM projects.
 - TypeScript type declarations included.
 
@@ -26,13 +26,6 @@ $ ./test/size.js
 Data from packagephobia.com
 ora           597 kB
 nanospinner    13 kB
-```
-
-Library loading time:
-
-```
-$ ./test/loading.js
-nanospinner    1.551 ms
 ```
 
 ## API
@@ -144,7 +137,7 @@ spinner.update({
   text: 'Run test',
   stream: process.stdout,
   frames: ['.', 'o', '0', '@', '*'],
-  interval: 100
+  interval: 100,
 })
 ```
 

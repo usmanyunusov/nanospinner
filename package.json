@@ -36,7 +36,6 @@
     "prettier": "^2.4.1"
   },
   "benchmarkDependencies": {
-    "mico-spinner": "^1.3.0",
     "ora": "^6.0.1"
   },
   "clean-publish": {

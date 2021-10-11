@@ -1,5 +1,5 @@
 const { green, red, yellow } = require('picocolors')
-const { isTTY, symbols } = require('./constants')
+const { isTTY, symbols } = require('./consts')
 
 function createSpinner(text = '', opts = {}) {
   let current = 0,
@@ -22,7 +22,7 @@ function createSpinner(text = '', opts = {}) {
     render() {
       let mark = yellow(frames[current])
       let str = `${mark} ${text}`
-      isTTY ? stream.write(`\x1b[?25l`) : (str += '\n')
+      isTTY ? spinner.write(`\x1b[?25l`) : (str += '\n')
       spinner.write(str, true)
     },
 
@@ -46,17 +46,18 @@ function createSpinner(text = '', opts = {}) {
 
     start(opts = {}) {
       timer && spinner.reset()
-      spinner.update({ text: opts.text || text }).loop()
+      spinner.update({ text: opts.text }).loop()
       return spinner
     },
 
     stop(opts = {}) {
-      let mark = yellow(frames[current])
       timer = clearTimeout(timer)
+
+      let mark = yellow(frames[current])
       spinner.write(`\x1b[2K\x1b[1G`)
       spinner.write(`${opts.mark || mark} ${opts.text || text}\n`)
-      isTTY && stream.write(`\x1b[?25h`)
-      return spinner
+
+      return isTTY ? spinner.write(`\x1b[?25h`) : spinner
     },
 
     success(opts = {}) {
