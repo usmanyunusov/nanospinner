@@ -4,19 +4,10 @@
   "description": "The simplest and tiniest terminal spinner for Node.js",
   "keywords": [
     "cli",
-    "nano",
-    "spinner",
-    "spinners",
-    "multi",
-    "terminal",
-    "term",
     "console",
-    "indicator",
-    "progress",
-    "loader",
-    "multispinner",
-    "multispinners",
-    "listr"
+    "spinner",
+    "terminal",
+    "loading"
   ],
   "author": "Usman Yunusov <usman.iunusov@gmail.com>",
   "license": "MIT",
