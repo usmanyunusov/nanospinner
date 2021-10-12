@@ -19,8 +19,11 @@ const symbols = {
   cross: isUTFSupport ? '✖' : '×',
 }
 
-function getLines(str, maxWidth = 80) {
-  return Math.ceil(str.replace(/\u001b[^m]*?m/g, '').length / maxWidth)
+function getLines(str = '', maxWidth = 80) {
+  return str
+    .replace(/\u001b[^m]*?m/g, '')
+    .split('\n')
+    .reduce((columns, line) => (columns += Math.max(1, Math.ceil(line.length / maxWidth))), 0)
 }
 
 module.exports = { isTTY, symbols, getLines }

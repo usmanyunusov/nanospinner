@@ -13,19 +13,19 @@ setTimeout(() => {
 ```
 
 - Only **single dependency** (picocolors).
-- It **~40 times** smaller than `ora`.
+- It **40 times** smaller than `ora`.
 - Support both CJS and ESM projects.
-- TypeScript type declarations included.
+- **TypeScript** type declarations included.
 
 ## Benchmarks
 
 The space in `node_modules` including sub-dependencies:
 
-```
-$ ./test/size.js
+```diff
+$ node ./test/size.js
 Data from packagephobia.com
-ora           597 kB
-nanospinner    13 kB
+  ora           597 kB
++ nanospinner    13 kB
 ```
 
 ## API
@@ -34,7 +34,7 @@ nanospinner    13 kB
   <summary>
     <b>
       <code>
-        spin()
+        .spin()
       </code>
     </b>
   </summary>
@@ -53,7 +53,7 @@ setInterval(() => {
   <summary>
     <b>
       <code>
-        start(opts?)
+        .start(options?)
       </code>
     </b>
   </summary>
@@ -71,7 +71,7 @@ spinner.start({ text: 'Start' })
   <summary>
     <b>
       <code>
-        stop(opts?)
+        .stop(options?)
       </code>
     </b>
   </summary>
@@ -89,7 +89,7 @@ spinner.stop({ text: 'Done!', mark: ':O' })
   <summary>
     <b>
       <code>
-        success(opts?)
+        .success(options?)
       </code>
     </b>
   </summary>
@@ -107,7 +107,7 @@ spinner.success({ text: 'Successful!', mark: ':)' })
   <summary>
     <b>
       <code>
-        error(opts?)
+        .error(options?)
       </code>
     </b>
   </summary>
@@ -125,7 +125,7 @@ spinner.error({ text: 'Error!', mark: ':(' })
   <summary>
     <b>
       <code>
-        update(opts?)
+        .update(options?)
       </code>
     </b>
   </summary>
@@ -147,7 +147,7 @@ spinner.update({
   <summary>
     <b>
       <code>
-        reset()
+        .reset()
       </code>
     </b>
   </summary>
