@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.0
+* Refactoring
+* Added support long message
+
 ## 0.2.2
 * Added opts to start
 
