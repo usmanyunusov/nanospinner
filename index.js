@@ -19,8 +19,8 @@ function createSpinner(text = '', opts = {}) {
     write(str, clear = false) {
       if (clear && isTTY) {
         stream.write('\x1b[1G')
-        for (let index = 0; index < lines; index++) {
-          index > 0 && stream.write('\x1b[1A')
+        for (let i = 0; i < lines; i++) {
+          i > 0 && stream.write('\x1b[1A')
           stream.write('\x1b[2K\x1b[1G')
         }
         lines = getLines(str, stream.columns)
