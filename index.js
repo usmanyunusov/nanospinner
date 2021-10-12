@@ -1,27 +1,38 @@
-let { green, red, yellow } = require('picocolors')
-let { isTTY, symbols } = require('./consts.js')
+const { green, red, yellow } = require('picocolors')
+const { isTTY, symbols, getLines } = require('./consts')
 
 function createSpinner(text = '', opts = {}) {
   let current = 0,
     interval = opts.interval || 25,
     stream = opts.stream || process.stderr,
     frames = opts.frames || symbols.frames,
+    lines = 0,
     timer
 
   let spinner = {
     reset() {
       current = 0
-      timer = null
+      lines = 0
+      timer = clearTimeout(timer)
     },
 
     write(str, clear = false) {
-      clear && stream.write(`\x1b[1G`)
-      stream.write(`${str}`)
+      if (clear && isTTY) {
+        stream.write('\x1b[1G')
+        for (let i = 0; i < lines; i++) {
+          i > 0 && stream.write('\x1b[1A')
+          stream.write('\x1b[2K\x1b[1G')
+        }
+        lines = getLines(str, stream.columns)
+      }
+
+      stream.write(str)
       return spinner
     },
 
     render() {
-      let str = `${yellow(frames[current])} ${text}`
+      let mark = yellow(frames[current])
+      let str = `${mark} ${text}`
       isTTY ? spinner.write(`\x1b[?25l`) : (str += '\n')
       spinner.write(str, true)
     },
@@ -33,55 +44,45 @@ function createSpinner(text = '', opts = {}) {
     },
 
     update(opts = {}) {
-      opts.text && (text = opts.text)
-      opts.frames && (frames = opts.frames)
-      opts.interval && (interval = opts.interval)
+      text = opts.text || text
+      frames = opts.frames || frames
+      interval = opts.interval || interval
       return spinner
     },
 
     loop() {
-      spinner.spin()
-      timer = setTimeout(() => isTTY && spinner.loop(), interval)
+      isTTY && (timer = setTimeout(() => spinner.loop(), interval))
+      return spinner.spin()
     },
 
     start(opts = {}) {
-      if (timer) return spinner
-
-      spinner.reset()
-      spinner.update({ text: opts.text || text })
-      spinner.loop()
-
-      process.on('SIGINT', () => {
-        spinner.stop()
-        process.exit()
-      })
-
-      return spinner
+      timer && spinner.reset()
+      return spinner.update({ text: opts.text }).loop()
     },
 
     stop(opts = {}) {
-      let mark = opts.mark || yellow(frames[current])
-
       timer = clearTimeout(timer)
-      spinner.update({ text: opts.text || text })
-      spinner.write(`\x1b[2K\x1b[1G`)
-      spinner.write(`${mark} ${text}\n`)
-      isTTY && spinner.write(`\x1b[?25h`)
-      return spinner
+
+      let mark = yellow(frames[current])
+      spinner.write(`${opts.mark || mark} ${opts.text || text}\n`, true)
+
+      return isTTY ? spinner.write(`\x1b[?25h`) : spinner
     },
 
     success(opts = {}) {
-      return spinner.stop({ mark: green(symbols.tick), ...opts })
+      let mark = green(symbols.tick)
+      return spinner.stop({ mark, ...opts })
     },
 
     error(opts = {}) {
-      return spinner.stop({ mark: red(symbols.cross), ...opts })
-    }
+      let mark = red(symbols.cross)
+      return spinner.stop({ mark, ...opts })
+    },
   }
 
   return spinner
 }
 
 module.exports = {
-  createSpinner
+  createSpinner,
 }

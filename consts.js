@@ -1,7 +1,5 @@
 const tty = require('tty')
 
-const isWindow = process.platform === 'win32'
-const isLinux = process.env.TERM === 'linux'
 const isCI =
   process.env.CI ||
   process.env.WT_SESSION ||
@@ -9,17 +7,23 @@ const isCI =
   process.env.TERM_PROGRAM === 'vscode' ||
   process.env.TERM === 'xterm-256color' ||
   process.env.TERM === 'alacritty'
-const isTTY = tty.isatty(1) && process.env.TERM !== 'dumb' && !process.env.CI
-
-const isUnicodSupport = !isWindow ? !isLinux : isCI
+const isTTY = tty.isatty(1) && process.env.TERM !== 'dumb' && !('CI' in process.env)
+const isUTFSupport = process.platform !== 'win32' ? process.env.TERM !== 'linux' : isCI
 const symbols = {
   frames: isTTY
-    ? isUnicodSupport
+    ? isUTFSupport
       ? ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
       : ['-', '\\', '|', '/']
     : ['-'],
-  tick: isUnicodSupport ? '✔' : '√',
-  cross: isUnicodSupport ? '✖' : '×'
+  tick: isUTFSupport ? '✔' : '√',
+  cross: isUTFSupport ? '✖' : '×',
 }
 
-module.exports = { isTTY, symbols }
+function getLines(str = '', maxWidth = 80) {
+  return str
+    .replace(/\u001b[^m]*?m/g, '')
+    .split('\n')
+    .reduce((columns, line) => (columns += Math.max(1, Math.ceil(line.length / maxWidth))), 0)
+}
+
+module.exports = { isTTY, symbols, getLines }

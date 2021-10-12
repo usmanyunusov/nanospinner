@@ -1,40 +1,31 @@
 # Nano Spinner
 
-Simple and tiny spinner library for Node.js
-
-- It takes **40 times less** space in node_modules than `ora`.
-- It is **7 times faster** than `mico-spinner`.
+The simplest and tiniest terminal spinner for Node.js
 
 ```js
 import { createSpinner } from 'nanospinner'
 
-let spinner = createSpinner('Run test')
+const spinner = createSpinner('Run test').start()
 
-spinner.start()
 setTimeout(() => {
   spinner.success()
 }, 1000)
 ```
 
+- Only **single dependency** (picocolors).
+- It **40 times** smaller than `ora`.
+- Support both CJS and ESM projects.
+- **TypeScript** type declarations included.
+
 ## Benchmarks
 
 The space in `node_modules` including sub-dependencies:
 
-```
-$ ./test/size.js
+```diff
+$ node ./test/size.js
 Data from packagephobia.com
-ora           597 kB
-cli-spinners   28 kB
-mico-spinner   28 kB
-nanospinner    13 kB
-```
-
-Library loading time:
-
-```
-$ ./test/loading.js
-mico-spinner  15.451 ms
-nanospinner    1.551 ms
+  ora           597 kB
++ nanospinner    13 kB
 ```
 
 ## API
@@ -43,7 +34,7 @@ nanospinner    1.551 ms
   <summary>
     <b>
       <code>
-        spin()
+        .spin()
       </code>
     </b>
   </summary>
@@ -62,7 +53,7 @@ setInterval(() => {
   <summary>
     <b>
       <code>
-        start(opts?)
+        .start(options?)
       </code>
     </b>
   </summary>
@@ -80,7 +71,7 @@ spinner.start({ text: 'Start' })
   <summary>
     <b>
       <code>
-        stop(opts?)
+        .stop(options?)
       </code>
     </b>
   </summary>
@@ -98,7 +89,7 @@ spinner.stop({ text: 'Done!', mark: ':O' })
   <summary>
     <b>
       <code>
-        success(opts?)
+        .success(options?)
       </code>
     </b>
   </summary>
@@ -116,7 +107,7 @@ spinner.success({ text: 'Successful!', mark: ':)' })
   <summary>
     <b>
       <code>
-        error(opts?)
+        .error(options?)
       </code>
     </b>
   </summary>
@@ -134,7 +125,7 @@ spinner.error({ text: 'Error!', mark: ':(' })
   <summary>
     <b>
       <code>
-        update(opts?)
+        .update(options?)
       </code>
     </b>
   </summary>
@@ -144,9 +135,9 @@ Use `update` call to dynamically change
 ```js
 spinner.update({
   text: 'Run test',
-  stream: stream.stdout,
+  stream: process.stdout,
   frames: ['.', 'o', '0', '@', '*'],
-  interval: 100
+  interval: 100,
 })
 ```
 
@@ -156,7 +147,7 @@ spinner.update({
   <summary>
     <b>
       <code>
-        reset()
+        .reset()
       </code>
     </b>
   </summary>
