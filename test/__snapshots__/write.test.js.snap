@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`marks spinner as write whit clear: CI 1`] = `"Write text"`;
-
-exports[`marks spinner as write whit clear: Local 1`] = `"[1GWrite text"`;
-
-exports[`marks spinner as write: CI 1`] = `"Write text"`;
-
-exports[`marks spinner as write: Local 1`] = `"Write text"`;

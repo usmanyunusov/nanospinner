@@ -11,7 +11,9 @@ it(`marks spinner as write`, () => {
 
   spinner.write('Write text')
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `"Write text"`
+  let snapCI = `"Write text"`
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it(`marks spinner as write whit clear`, () => {
@@ -20,5 +22,7 @@ it(`marks spinner as write whit clear`, () => {
 
   spinner.write('Write text', true)
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `"[1GWrite text"`
+  let snapCI = `"Write text"`
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })

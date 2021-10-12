@@ -16,5 +16,14 @@ it(`spins default frames`, () => {
   spinner.spin()
   spinner.spin()
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `"[?25l[1G[33m⠋[39m #reset[?25l[1G[2K[1G[33m⠙[39m #reset[?25l[1G[2K[1G[33m⠹[39m #reset[?25l[1G[33m⠋[39m #reset[?25l[1G[2K[1G[33m⠙[39m #reset"`
+  let snapCI = `
+    "[33m-[39m #reset
+    [33m-[39m #reset
+    [33m-[39m #reset
+    [33m-[39m #reset
+    [33m-[39m #reset
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })

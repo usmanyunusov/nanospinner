@@ -14,7 +14,18 @@ it(`doesn't reprint stop message`, () => {
   spinner.spin()
   spinner.stop()
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[?25l[1G[2K[1G[33m⠹[39m #stop[1G[2K[1G[33m⠸[39m #stop
+    [?25h"
+  `
+  let snapCI = `
+    "[33m-[39m #stop
+    [33m-[39m #stop
+    [33m-[39m #stop
+    [33m-[39m #stop
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it('stops after 2 spins and prints stop message', () => {
@@ -25,7 +36,17 @@ it('stops after 2 spins and prints stop message', () => {
   spinner.spin()
   spinner.stop({ text: 'Done!' })
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[1G[2K[1G[33m⠹[39m Done!
+    [?25h"
+  `
+  let snapCI = `
+    "[33m-[39m #stop
+    [33m-[39m #stop
+    [33m-[39m Done!
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it('marks spinner as stop with mark', () => {
@@ -37,5 +58,16 @@ it('marks spinner as stop with mark', () => {
   spinner.spin()
   spinner.stop({ mark: 'V' })
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[?25l[1G[2K[1G[33m⠹[39m #stop[1G[2K[1GV #stop
+    [?25h"
+  `
+  let snapCI = `
+    "[33m-[39m #stop
+    [33m-[39m #stop
+    [33m-[39m #stop
+    V #stop
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })

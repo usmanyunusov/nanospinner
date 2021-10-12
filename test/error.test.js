@@ -14,7 +14,18 @@ it('marks spinner as error', () => {
   spinner.spin()
   spinner.error()
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #error[?25l[1G[2K[1G[33m⠙[39m #error[?25l[1G[2K[1G[33m⠹[39m #error[1G[2K[1G[31m✖[39m #error
+    [?25h"
+  `
+  let snapCI = `
+    "[33m-[39m #error
+    [33m-[39m #error
+    [33m-[39m #error
+    [31m✖[39m #error
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it('marks spinner as error with message', () => {
@@ -26,7 +37,18 @@ it('marks spinner as error with message', () => {
   spinner.spin()
   spinner.error({ text: 'Error' })
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #error[?25l[1G[2K[1G[33m⠙[39m #error[?25l[1G[2K[1G[33m⠹[39m #error[1G[2K[1G[31m✖[39m Error
+    [?25h"
+  `
+  let snapCI = `
+    "[33m-[39m #error
+    [33m-[39m #error
+    [33m-[39m #error
+    [31m✖[39m Error
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
 it('marks spinner as error with mark', () => {
@@ -38,5 +60,16 @@ it('marks spinner as error with mark', () => {
   spinner.spin()
   spinner.error({ mark: '!' })
 
-  expect(stdout.out).toMatchSnapshot(process.env.CI ? 'CI' : 'Local')
+  let snapLocal = `
+    "[?25l[1G[33m⠋[39m #error[?25l[1G[2K[1G[33m⠙[39m #error[?25l[1G[2K[1G[33m⠹[39m #error[1G[2K[1G! #error
+    [?25h"
+  `
+  let snapCI = `
+    "[33m-[39m #error
+    [33m-[39m #error
+    [33m-[39m #error
+    ! #error
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
