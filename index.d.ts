@@ -6,7 +6,7 @@ interface Options {
 }
 
 interface Spinner {
-  update(opts: Options): Spinner
+  update(opts?: Options): Spinner
   reset(): Spinner
   spin(): Spinner
   stop(opts?: { text?: string; mark?: string }): Spinner
