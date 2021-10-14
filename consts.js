@@ -8,22 +8,15 @@ const isCI =
   process.env.TERM === 'xterm-256color' ||
   process.env.TERM === 'alacritty'
 const isTTY = tty.isatty(1) && process.env.TERM !== 'dumb' && !('CI' in process.env)
-const isUTFSupport = process.platform !== 'win32' ? process.env.TERM !== 'linux' : isCI
+const supportUnicode = process.platform !== 'win32' ? process.env.TERM !== 'linux' : isCI
 const symbols = {
   frames: isTTY
-    ? isUTFSupport
+    ? supportUnicode
       ? ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
       : ['-', '\\', '|', '/']
     : ['-'],
-  tick: isUTFSupport ? '✔' : '√',
-  cross: isUTFSupport ? '✖' : '×',
+  tick: supportUnicode ? '✔' : '√',
+  cross: supportUnicode ? '✖' : '×',
 }
 
-function getLines(str = '', maxWidth = 80) {
-  return str
-    .replace(/\u001b[^m]*?m/g, '')
-    .split('\n')
-    .reduce((columns, line) => (columns += Math.max(1, Math.ceil(line.length / maxWidth))), 0)
-}
-
-module.exports = { isTTY, symbols, getLines }
+module.exports = { isTTY, symbols }

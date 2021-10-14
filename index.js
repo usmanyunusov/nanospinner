@@ -1,5 +1,12 @@
 const { green, red, yellow } = require('picocolors')
-const { isTTY, symbols, getLines } = require('./consts')
+const { isTTY, symbols } = require('./consts')
+
+function getLines(str = '', width = 80) {
+  return str
+    .replace(/\u001b[^m]*?m/g, '')
+    .split('\n')
+    .reduce((col, line) => (col += Math.max(1, Math.ceil(line.length / width))), 0)
+}
 
 function createSpinner(text = '', opts = {}) {
   let current = 0,
@@ -18,12 +25,12 @@ function createSpinner(text = '', opts = {}) {
 
     write(str, clear = false) {
       if (clear && isTTY) {
-        stream.write('\x1b[1G')
+        spinner.write('\x1b[1G')
         for (let i = 0; i < lines; i++) {
-          i > 0 && stream.write('\x1b[1A')
-          stream.write('\x1b[2K\x1b[1G')
+          i > 0 && spinner.write('\x1b[1A')
+          spinner.write('\x1b[2K\x1b[1G')
         }
-        lines = getLines(str, stream.columns)
+        lines = 0
       }
 
       stream.write(str)
@@ -35,6 +42,7 @@ function createSpinner(text = '', opts = {}) {
       let str = `${mark} ${text}`
       isTTY ? spinner.write(`\x1b[?25l`) : (str += '\n')
       spinner.write(str, true)
+      isTTY && (lines = getLines(str, stream.columns))
     },
 
     spin() {
