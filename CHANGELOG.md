@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.1
+* Fixed support a few write text after start ([`af4bb39`](https://github.com/alexeyraspopov/picocolors/pull/31))
+
 ## 0.3.0
 * Refactoring
 * Added support long message
