@@ -13,9 +13,13 @@ setTimeout(() => {
 ```
 
 - Only **single dependency** (picocolors).
-- It **40 times** smaller than `ora`.
+- It **45 times** smaller than `ora`.
 - Support both CJS and ESM projects.
 - **TypeScript** type declarations included.
+
+## Motivation
+
+With `nanospinner` we are trying to draw attention to the `node_modules` size problem and promote performance-first culture.
 
 ## Benchmarks
 
