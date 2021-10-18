@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.2
+* Updated `picocolors`, `clean-publish`, `jest`
+
 ## 0.3.1
 * Fixed support a few write text after start ([`af4bb39`](https://github.com/alexeyraspopov/picocolors/pull/31))
 
