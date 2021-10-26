@@ -151,6 +151,23 @@ spinner.update({
   <summary>
     <b>
       <code>
+        .clear()
+      </code>
+    </b>
+  </summary>
+
+Clears the spinner`s output
+
+```js
+spinner.clear()
+```
+
+</details>
+
+<details>
+  <summary>
+    <b>
+      <code>
         .reset()
       </code>
     </b>

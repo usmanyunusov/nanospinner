@@ -1,18 +1,19 @@
 interface Options {
-  text?: string
   stream?: NodeJS.WriteStream
-  interval?: number
   frames?: string[]
+  interval?: number
+  text?: string
 }
 
 interface Spinner {
-  update(opts?: Options): Spinner
-  reset(): Spinner
-  spin(): Spinner
+  success(opts?: { text?: string; mark?: string }): Spinner
+  error(opts?: { text?: string; mark?: string }): Spinner
   stop(opts?: { text?: string; mark?: string }): Spinner
   start(opts?: { text?: string }): Spinner
-  error(opts?: { text?: string; mark?: string }): Spinner
-  success(opts?: { text?: string; mark?: string }): Spinner
+  update(opts?: Options): Spinner
+  reset(): Spinner
+  clear(): Spinner
+  spin(): Spinner
 }
 
 export function createSpinner(text?: string, opts?: Options): Spinner

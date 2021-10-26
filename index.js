@@ -23,14 +23,20 @@ function createSpinner(text = '', opts = {}) {
       timer = clearTimeout(timer)
     },
 
+    clear() {
+      spinner.write('\x1b[1G')
+      for (let i = 0; i < lines; i++) {
+        i > 0 && spinner.write('\x1b[1A')
+        spinner.write('\x1b[2K\x1b[1G')
+      }
+      lines = 0
+
+      return spinner
+    },
+
     write(str, clear = false) {
       if (clear && isTTY) {
-        spinner.write('\x1b[1G')
-        for (let i = 0; i < lines; i++) {
-          i > 0 && spinner.write('\x1b[1A')
-          spinner.write('\x1b[2K\x1b[1G')
-        }
-        lines = 0
+        spinner.clear()
       }
 
       stream.write(str)
