@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.4.0
+* Add new `clear` method
+
 ## 0.3.2
 * Updated `picocolors`, `clean-publish`, `jest`
 
