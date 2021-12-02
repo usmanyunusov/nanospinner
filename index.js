@@ -10,7 +10,7 @@ function getLines(str = '', width = 80) {
 
 function createSpinner(text = '', opts = {}) {
   let current = 0,
-    interval = opts.interval || 25,
+    interval = opts.interval || 50,
     stream = opts.stream || process.stderr,
     frames = opts.frames || symbols.frames,
     lines = 0,
