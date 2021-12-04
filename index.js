@@ -48,7 +48,7 @@ function createSpinner(text = '', opts = {}) {
     },
 
     render() {
-      let mark = color(frames[current])
+      let mark = picocolors[color](frames[current])
       let str = `${mark} ${text}`
       isTTY ? spinner.write(`\x1b[?25l`) : (str += '\n')
       spinner.write(str, true)
@@ -82,7 +82,7 @@ function createSpinner(text = '', opts = {}) {
     stop(opts = {}) {
       timer = clearTimeout(timer)
 
-      let mark = color(frames[current])
+      let mark = picocolors[color](frames[current])
       spinner.write(`${opts.mark || mark} ${opts.text || text}\n`, true)
 
       return isTTY ? spinner.write(`\x1b[?25h`) : spinner
