@@ -2,7 +2,7 @@ const pico = require('pico')
 
 const { isTTY, symbols } = require('./consts')
 
-const { green, red, yellow } = pico
+const { green, red } = pico
 
 function getLines(str = '', width = 80) {
   return str
@@ -16,7 +16,7 @@ function createSpinner(text = '', opts = {}) {
     interval = opts.interval || 50,
     stream = opts.stream || process.stderr,
     frames = opts.frames || symbols.frames,
-    color = opts.color || yellow,
+    color = opts.color || 'yellow',
     lines = 0,
     timer
 
