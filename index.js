@@ -1,8 +1,8 @@
-const picocolors = require('picocolors')
+const pico = require('pico')
 
 const { isTTY, symbols } = require('./consts')
 
-const { green, red, yellow } = picocolors
+const { green, red, yellow } = pico
 
 function getLines(str = '', width = 80) {
   return str
@@ -48,7 +48,7 @@ function createSpinner(text = '', opts = {}) {
     },
 
     render() {
-      let mark = picocolors[color](frames[current])
+      let mark = pico[color](frames[current])
       let str = `${mark} ${text}`
       isTTY ? spinner.write(`\x1b[?25l`) : (str += '\n')
       spinner.write(str, true)
@@ -82,7 +82,7 @@ function createSpinner(text = '', opts = {}) {
     stop(opts = {}) {
       timer = clearTimeout(timer)
 
-      let mark = picocolors[color](frames[current])
+      let mark = pico[color](frames[current])
       spinner.write(`${opts.mark || mark} ${opts.text || text}\n`, true)
 
       return isTTY ? spinner.write(`\x1b[?25h`) : spinner
