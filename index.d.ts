@@ -3,6 +3,7 @@ interface Options {
   frames?: string[]
   interval?: number
   text?: string
+  color?: string
 }
 
 interface Spinner {
