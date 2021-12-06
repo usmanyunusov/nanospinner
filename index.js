@@ -76,7 +76,7 @@ function createSpinner(text = '', opts = {}) {
 
     start(opts = {}) {
       timer && spinner.reset()
-      return spinner.update({ text: opts.text }).loop()
+      return spinner.update({ text: opts.text, color: opts.color }).loop()
     },
 
     stop(opts = {}) {
