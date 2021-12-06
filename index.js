@@ -1,4 +1,4 @@
-const pico = require('pico')
+const pico = require('picocolors')
 
 const { isTTY, symbols } = require('./consts')
 
