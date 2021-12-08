@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.6.0
+
+- Make color customizable (by Kiko Beats)
+
 ## 0.5.0
 
 - Increase default interval (by Andrey Sitnik)
