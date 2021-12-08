@@ -66,7 +66,7 @@ In order to start the spinner call `start`. This will perform drawing the spinni
 
 ```js
 spinner.start()
-spinner.start({ text: 'Start' })
+spinner.start({ text: 'Start', color: 'yellow' })
 ```
 
 </details>
@@ -139,6 +139,7 @@ Use `update` call to dynamically change
 ```js
 spinner.update({
   text: 'Run test',
+  color: 'white',
   stream: process.stdout,
   frames: ['.', 'o', '0', '@', '*'],
   interval: 100,
