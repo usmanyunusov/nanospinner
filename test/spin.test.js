@@ -36,3 +36,35 @@ it('spins default frames', () => {
   `
   expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
+
+it('spins defult frames if new ones have no elements', () => {
+  stdout.out = ''
+  let spinner = createSpinner('', { stream: stdout, frames: [] })
+
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+
+  let snapLocal = `"[?25l[1G[33m⠋[39m [?25l[1G[2K[1G[33m⠙[39m [?25l[1G[2K[1G[33m⠹[39m [?25l[1G[2K[1G[33m⠸[39m [?25l[1G[2K[1G[33m⠼[39m [?25l[1G[2K[1G[33m⠴[39m [?25l[1G[2K[1G[33m⠦[39m [?25l[1G[2K[1G[33m⠧[39m [?25l[1G[2K[1G[33m⠇[39m [?25l[1G[2K[1G[33m⠏[39m "`
+  let snapCI = `
+    "[33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    [33m-[39m 
+    "
+  `
+  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+})
