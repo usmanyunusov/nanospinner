@@ -15,7 +15,7 @@ function createSpinner(text = '', opts = {}) {
   let current = 0,
     interval = opts.interval || 50,
     stream = opts.stream || process.stderr,
-    frames = opts.frames || symbols.frames,
+    frames = opts.frames?.length ? opts.frames : symbols.frames,
     color = opts.color || 'yellow',
     lines = 0,
     timer
@@ -63,7 +63,7 @@ function createSpinner(text = '', opts = {}) {
 
     update(opts = {}) {
       text = opts.text || text
-      frames = opts.frames || frames
+      frames = opts.frames?.length ? opts.frames : frames
       interval = opts.interval || interval
       color = opts.color || color
 
