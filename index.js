@@ -66,6 +66,11 @@ function createSpinner(text = '', opts = {}) {
       frames = opts.frames || frames
       interval = opts.interval || interval
       color = opts.color || color
+
+      if (frames.length - 1 < current) {
+        current = 0
+      }
+
       return spinner
     },
 
