@@ -56,17 +56,17 @@ it('marks spinner as stop with mark', () => {
   spinner.spin()
   spinner.spin()
   spinner.spin()
-  spinner.stop({ mark: 'V' })
+  spinner.stop({ mark: 'V', color: 'magenta' })
 
   let snapLocal = `
-    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[?25l[1G[2K[1G[33m⠹[39m #stop[1G[2K[1GV #stop
+    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[?25l[1G[2K[1G[33m⠹[39m #stop[1G[2K[1G[35mV[39m #stop
     [?25h"
   `
   let snapCI = `
     "[33m-[39m #stop
     [33m-[39m #stop
     [33m-[39m #stop
-    V #stop
+    [35mV[39m #stop
     "
   `
   expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)

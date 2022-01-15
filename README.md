@@ -84,7 +84,7 @@ In order to stop the spinner call `stop`. This will finish drawing the spinning 
 
 ```js
 spinner.stop()
-spinner.stop({ text: 'Done!', mark: ':O' })
+spinner.stop({ text: 'Done!', mark: ':O', color: 'magenta' })
 ```
 
 </details>
