@@ -15,15 +15,17 @@
   "types": "./index.d.ts",
   "main": "./index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "unit": "uvu test .test.js$",
+    "test": "c8 pnpm unit"
   },
   "dependencies": {
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
+    "c8": "^7.11.0",
     "clean-publish": "^3.4.2",
-    "jest": "^27.3.0",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "uvu": "^0.5.3"
   },
   "benchmarkDependencies": {
     "ora": "^6.0.1"
@@ -31,12 +33,16 @@
   "clean-publish": {
     "cleanDocs": true
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "prettier": {
     "printWidth": 100,
     "semi": false,
     "singleQuote": true
+  },
+  "c8": {
+    "exclude": [
+      "**/*.test.*"
+    ],
+    "lines": 75,
+    "check-coverage": true
   }
 }

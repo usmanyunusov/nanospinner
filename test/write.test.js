@@ -1,3 +1,6 @@
+let { test } = require('uvu')
+let { is } = require('uvu/assert')
+
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -5,24 +8,26 @@ stdout.write = (symbols) => {
   stdout.out += symbols
 }
 
-it(`marks spinner as write`, () => {
+test.before.each(() => {
   stdout.out = ''
-  let spinner = createSpinner('#write', { stream: stdout })
-
-  spinner.write('Write text')
-
-  let snapLocal = `"Write text"`
-  let snapCI = `"Write text"`
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
 })
 
-it(`marks spinner as write whit clear`, () => {
-  stdout.out = ''
-  let spinner = createSpinner('#write', { stream: stdout })
+test(`marks spinner as write`, () => {
+  createSpinner('#write', { stream: stdout }).write('Write text')
 
-  spinner.write('Write text', true)
+  let snapLocal = 'Write text'
+  let snapCI = 'Write text'
 
-  let snapLocal = `"[1GWrite text"`
-  let snapCI = `"Write text"`
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
+
+test(`marks spinner as write whit clear`, () => {
+  createSpinner('#write', { stream: stdout }).write('Write text', true)
+
+  let snapLocal = '\x1B[1GWrite text'
+  let snapCI = 'Write text'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
+})
+
+test.run()

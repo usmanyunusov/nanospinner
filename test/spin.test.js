@@ -1,3 +1,6 @@
+let { test } = require('uvu')
+let { is } = require('uvu/assert')
+
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -5,8 +8,11 @@ stdout.write = (symbols) => {
   stdout.out += symbols
 }
 
-it('spins default frames', () => {
+test.before.each(() => {
   stdout.out = ''
+})
+
+test('spins default frames', () => {
   let spinner = createSpinner('', { stream: stdout })
 
   spinner.spin()
@@ -20,25 +26,24 @@ it('spins default frames', () => {
   spinner.spin()
   spinner.spin()
 
-  let snapLocal = `"[?25l[1G[33m⠋[39m [?25l[1G[2K[1G[33m⠙[39m [?25l[1G[2K[1G[33m⠹[39m [?25l[1G[2K[1G[33m⠸[39m [?25l[1G[2K[1G[33m⠼[39m [?25l[1G[2K[1G[33m⠴[39m [?25l[1G[2K[1G[33m⠦[39m [?25l[1G[2K[1G[33m⠧[39m [?25l[1G[2K[1G[33m⠇[39m [?25l[1G[2K[1G[33m⠏[39m "`
-  let snapCI = `
-    "[33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    "
-  `
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠸\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠼\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠴\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠦\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠧\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠇\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠏\x1B[39m '
+  let snapCI =
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
 
-it('spins defult frames if new ones have no elements', () => {
-  stdout.out = ''
+test('spins defult frames if new ones have no elements', () => {
   let spinner = createSpinner('', { stream: stdout, frames: [] })
 
   spinner.spin()
@@ -52,19 +57,21 @@ it('spins defult frames if new ones have no elements', () => {
   spinner.spin()
   spinner.spin()
 
-  let snapLocal = `"[?25l[1G[33m⠋[39m [?25l[1G[2K[1G[33m⠙[39m [?25l[1G[2K[1G[33m⠹[39m [?25l[1G[2K[1G[33m⠸[39m [?25l[1G[2K[1G[33m⠼[39m [?25l[1G[2K[1G[33m⠴[39m [?25l[1G[2K[1G[33m⠦[39m [?25l[1G[2K[1G[33m⠧[39m [?25l[1G[2K[1G[33m⠇[39m [?25l[1G[2K[1G[33m⠏[39m "`
-  let snapCI = `
-    "[33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    [33m-[39m 
-    "
-  `
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠸\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠼\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠴\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠦\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠧\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠇\x1B[39m \x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠏\x1B[39m '
+  let snapCI =
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n' +
+    '\x1B[33m-\x1B[39m \n'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
+
+test.run()

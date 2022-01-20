@@ -1,3 +1,6 @@
+let { test } = require('uvu')
+let { is } = require('uvu/assert')
+
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -5,8 +8,11 @@ stdout.write = (symbols) => {
   stdout.out += symbols
 }
 
-it('uses custom frames', () => {
+test.before.each(() => {
   stdout.out = ''
+})
+
+test('uses custom frames', () => {
   let spinner = createSpinner('#update', { stream: stdout })
 
   spinner.spin()
@@ -16,20 +22,19 @@ it('uses custom frames', () => {
   spinner.spin()
   spinner.spin()
 
-  let snapLocal = `"[?25l[1G[33m⠋[39m #update[?25l[1G[2K[1G[33m⠙[39m #update[?25l[1G[2K[1G[33m0[39m Change update[?25l[1G[2K[1G[33m@[39m Change update[?25l[1G[2K[1G[33m*[39m Change update"`
-  let snapCI = `
-    "[33m-[39m #update
-    [33m-[39m #update
-    [33m.[39m Change update
-    [33mo[39m Change update
-    [33m0[39m Change update
-    "
-  `
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m0\x1B[39m Change update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m@\x1B[39m Change update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m*\x1B[39m Change update'
+  let snapCI =
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m.\x1B[39m Change update\n' +
+    '\x1B[33mo\x1B[39m Change update\n' +
+    '\x1B[33m0\x1B[39m Change update\n'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
 
-it('uses custom frames with less elements', () => {
-  stdout.out = ''
+test('uses custom frames with less elements', () => {
   let spinner = createSpinner('#update', { stream: stdout })
 
   spinner.spin()
@@ -39,21 +44,19 @@ it('uses custom frames with less elements', () => {
   spinner.spin()
   spinner.spin()
 
-  let snapLocal = `"[?25l[1G[33m⠋[39m #update[?25l[1G[2K[1G[33m⠙[39m #update[?25l[1G[2K[1G[33m⠹[39m #update[?25l[1G[2K[1G[33m.[39m Change update[?25l[1G[2K[1G[33mo[39m Change update"`
-  let snapCI = `
-    "[33m-[39m #update
-    [33m-[39m #update
-    [33m-[39m #update
-    [33m.[39m Change update
-    [33mo[39m Change update
-    "
-  `
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m.\x1B[39m Change update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33mo\x1B[39m Change update'
+  let snapCI =
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m.\x1B[39m Change update\n' +
+    '\x1B[33mo\x1B[39m Change update\n'
 
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
 
-it('uses default frames if new ones have no elements', () => {
-  stdout.out = ''
+test('uses default frames if new ones have no elements', () => {
   let spinner = createSpinner('#update', { stream: stdout })
 
   spinner.spin()
@@ -63,15 +66,16 @@ it('uses default frames if new ones have no elements', () => {
   spinner.spin()
   spinner.spin()
 
-  let snapLocal = `"[?25l[1G[33m⠋[39m #update[?25l[1G[2K[1G[33m⠙[39m #update[?25l[1G[2K[1G[33m⠹[39m #update[?25l[1G[2K[1G[33m⠸[39m Change update[?25l[1G[2K[1G[33m⠼[39m Change update"`
-  let snapCI = `
-    "[33m-[39m #update
-    [33m-[39m #update
-    [33m-[39m #update
-    [33m-[39m Change update
-    [33m-[39m Change update
-    "
-  `
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠸\x1B[39m Change update\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠼\x1B[39m Change update'
+  let snapCI =
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m-\x1B[39m #update\n' +
+    '\x1B[33m-\x1B[39m Change update\n' +
+    '\x1B[33m-\x1B[39m Change update\n'
 
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
+
+test.run()

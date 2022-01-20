@@ -1,3 +1,6 @@
+let { test } = require('uvu')
+let { is } = require('uvu/assert')
+
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -5,8 +8,11 @@ stdout.write = (symbols) => {
   stdout.out += symbols
 }
 
-it(`marks spinner as clear`, () => {
+test.before.each(() => {
   stdout.out = ''
+})
+
+test(`marks spinner as clear`, () => {
   let spinner = createSpinner('#clear', { stream: stdout })
 
   spinner.spin()
@@ -15,12 +21,12 @@ it(`marks spinner as clear`, () => {
   spinner.clear()
   stdout.write('console.log()')
 
-  let snapLocal = `"[?25l[1G[33m⠋[39m #clear[?25l[1G[2K[1G[33m⠙[39m #clear[?25l[1G[2K[1G[33m⠹[39m #clear[1G[2K[1Gconsole.log()"`
-  let snapCI = `
-    "[33m-[39m #clear
-    [33m-[39m #clear
-    [33m-[39m #clear
-    [1Gconsole.log()"
-  `
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #clear\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #clear\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #clear\x1B[1G\x1B[2K\x1B[1Gconsole.log()'
+  let snapCI =
+    '\x1B[33m-\x1B[39m #clear\n\x1B[33m-\x1B[39m #clear\n\x1B[33m-\x1B[39m #clear\n\x1B[1Gconsole.log()'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
+
+test.run()

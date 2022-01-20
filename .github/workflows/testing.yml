@@ -71,6 +71,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-engines
       - name: Run unit tests
-        run: npx jest
+        run: pnpm unit
         env:
           FORCE_COLOR: 2

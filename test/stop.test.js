@@ -1,3 +1,6 @@
+let { test } = require('uvu')
+let { is } = require('uvu/assert')
+
 let { createSpinner } = require('../index.js')
 
 let stdout = { out: '' }
@@ -5,8 +8,11 @@ stdout.write = (symbols) => {
   stdout.out += symbols
 }
 
-it(`doesn't reprint stop message`, () => {
+test.before.each(() => {
   stdout.out = ''
+})
+
+test(`doesn't reprint stop message`, () => {
   let spinner = createSpinner('#stop', { stream: stdout })
 
   spinner.spin()
@@ -14,43 +20,31 @@ it(`doesn't reprint stop message`, () => {
   spinner.spin()
   spinner.stop()
 
-  let snapLocal = `
-    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[?25l[1G[2K[1G[33m⠹[39m #stop[1G[2K[1G[33m⠸[39m #stop
-    [?25h"
-  `
-  let snapCI = `
-    "[33m-[39m #stop
-    [33m-[39m #stop
-    [33m-[39m #stop
-    [33m-[39m #stop
-    "
-  `
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #stop\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠸\x1B[39m #stop\n' +
+    '\x1B[?25h'
+  let snapCI =
+    '\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
 
-it('stops after 2 spins and prints stop message', () => {
-  stdout.out = ''
+test('stops after 2 spins and prints stop message', () => {
   let spinner = createSpinner('#stop', { stream: stdout })
 
   spinner.spin()
   spinner.spin()
   spinner.stop({ text: 'Done!' })
 
-  let snapLocal = `
-    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[1G[2K[1G[33m⠹[39m Done!
-    [?25h"
-  `
-  let snapCI = `
-    "[33m-[39m #stop
-    [33m-[39m #stop
-    [33m-[39m Done!
-    "
-  `
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #stop\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m Done!\n' +
+    '\x1B[?25h'
+  let snapCI = '\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m Done!\n'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
 
-it('marks spinner as stop with mark', () => {
-  stdout.out = ''
+test('marks spinner as stop with mark', () => {
   let spinner = createSpinner('#stop', { stream: stdout })
 
   spinner.spin()
@@ -58,16 +52,13 @@ it('marks spinner as stop with mark', () => {
   spinner.spin()
   spinner.stop({ mark: 'V', color: 'magenta' })
 
-  let snapLocal = `
-    "[?25l[1G[33m⠋[39m #stop[?25l[1G[2K[1G[33m⠙[39m #stop[?25l[1G[2K[1G[33m⠹[39m #stop[1G[2K[1G[35mV[39m #stop
-    [?25h"
-  `
-  let snapCI = `
-    "[33m-[39m #stop
-    [33m-[39m #stop
-    [33m-[39m #stop
-    [35mV[39m #stop
-    "
-  `
-  expect(stdout.out).toMatchInlineSnapshot(process.env.CI ? snapCI : snapLocal)
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #stop\x1B[1G\x1B[2K\x1B[1G\x1B[35mV\x1B[39m #stop\n' +
+    '\x1B[?25h'
+  let snapCI =
+    '\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[35mV\x1B[39m #stop\n'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })
+
+test.run()
