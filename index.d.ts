@@ -9,6 +9,7 @@ interface Options {
 interface Spinner {
   success(opts?: { text?: string; mark?: string }): Spinner
   error(opts?: { text?: string; mark?: string }): Spinner
+  warn(opts?: { text?: string; mark?: string }): Spinner
   stop(opts?: { text?: string; mark?: string; color?: string }): Spinner
   start(opts?: { text?: string; color?: string }): Spinner
   update(opts?: Options): Spinner

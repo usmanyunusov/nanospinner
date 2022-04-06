@@ -17,6 +17,7 @@ const symbols = {
     : ['-'],
   tick: supportUnicode ? '✔' : '√',
   cross: supportUnicode ? '✖' : '×',
+  warn: '⚠',
 }
 
 module.exports = { isTTY, symbols }
