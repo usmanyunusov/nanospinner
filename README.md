@@ -111,6 +111,24 @@ spinner.success({ text: 'Successful!', mark: ':)' })
   <summary>
     <b>
       <code>
+        .warn(options?)
+      </code>
+    </b>
+  </summary>
+
+Use `warn` call to stop the spinning animation and replace the spinning symbol with warn mark character to indicate warning completion.
+
+```js
+spinner.warn()
+spinner.warn({ text: 'Warning!', mark: ':|' })
+```
+
+</details>
+
+<details>
+  <summary>
+    <b>
+      <code>
         .error(options?)
       </code>
     </b>
