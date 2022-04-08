@@ -23,8 +23,8 @@
   },
   "devDependencies": {
     "c8": "^7.11.0",
-    "clean-publish": "^3.4.2",
-    "prettier": "^2.4.1",
+    "clean-publish": "^3.4.5",
+    "prettier": "^2.6.2",
     "uvu": "^0.5.3"
   },
   "benchmarkDependencies": {
