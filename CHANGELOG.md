@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.1.0
+
+- Added warm method (by Konstantin Epishev)
+
 ## 1.0.0
 
 - Replaced jest to uvu
