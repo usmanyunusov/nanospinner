@@ -16,6 +16,7 @@ interface Spinner {
   reset(): Spinner
   clear(): Spinner
   spin(): Spinner
+  isSpinning(): boolean
 }
 
 export function createSpinner(text?: string, opts?: Options): Spinner

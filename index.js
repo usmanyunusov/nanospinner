@@ -17,6 +17,7 @@ function createSpinner(text = '', opts = {}) {
     stream = opts.stream || process.stderr,
     frames = opts.frames && opts.frames.length ? opts.frames : symbols.frames,
     color = opts.color || 'yellow',
+    spinning = false,
     lines = 0,
     timer
 
@@ -24,6 +25,7 @@ function createSpinner(text = '', opts = {}) {
     reset() {
       current = 0
       lines = 0
+      spinning = false
       timer = clearTimeout(timer)
     },
 
@@ -81,11 +83,13 @@ function createSpinner(text = '', opts = {}) {
 
     start(opts = {}) {
       timer && spinner.reset()
+      spinning = true
       return spinner.update({ text: opts.text, color: opts.color }).loop()
     },
 
     stop(opts = {}) {
       timer = clearTimeout(timer)
+      spinning = false
 
       let mark = pico[opts.color || color](frames[current])
       let optsMark = opts.mark && opts.color ? pico[opts.color](opts.mark) : opts.mark
@@ -107,6 +111,10 @@ function createSpinner(text = '', opts = {}) {
     warn(opts = {}) {
       let mark = yellow(symbols.warn)
       return spinner.stop({ mark, ...opts })
+    },
+
+    isSpinning() {
+      return spinning
     },
   }
 
