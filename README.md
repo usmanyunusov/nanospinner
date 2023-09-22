@@ -33,15 +33,7 @@ Data from packagephobia.com
 ```
 
 ## API
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .spin()
-      </code>
-    </b>
-  </summary>
+__`.spin()`__
 
 Looping over `spin` method will animate a given spinner.
 
@@ -51,16 +43,7 @@ setInterval(() => {
 }, 25)
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .start(options?)
-      </code>
-    </b>
-  </summary>
+__`.start(options?)`__
 
 In order to start the spinner call `start`. This will perform drawing the spinning animation
 
@@ -69,16 +52,7 @@ spinner.start()
 spinner.start({ text: 'Start', color: 'yellow' })
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .stop(options?)
-      </code>
-    </b>
-  </summary>
+__`.stop(options?)`__
 
 In order to stop the spinner call `stop`. This will finish drawing the spinning animation and return to new line.
 
@@ -87,16 +61,7 @@ spinner.stop()
 spinner.stop({ text: 'Done!', mark: ':O', color: 'magenta' })
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .success(options?)
-      </code>
-    </b>
-  </summary>
+__`.success(options?)`__
 
 Use `success` call to stop the spinning animation and replace the spinning symbol with check mark character to indicate successful completion.
 
@@ -105,16 +70,7 @@ spinner.success()
 spinner.success({ text: 'Successful!', mark: ':)' })
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .warn(options?)
-      </code>
-    </b>
-  </summary>
+__`.warn(options?)`__
 
 Use `warn` call to stop the spinning animation and replace the spinning symbol with warn mark character to indicate warning completion.
 
@@ -123,16 +79,7 @@ spinner.warn()
 spinner.warn({ text: 'Warning!', mark: ':|' })
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .error(options?)
-      </code>
-    </b>
-  </summary>
+__`.error(options?)`__
 
 Use `error` call to stop the spinning animation and replace the spinning symbol with cross character to indicate error completion.
 
@@ -141,16 +88,7 @@ spinner.error()
 spinner.error({ text: 'Error!', mark: ':(' })
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .update(options?)
-      </code>
-    </b>
-  </summary>
+__`.update(options?)`__
 
 Use `update` call to dynamically change
 
@@ -164,16 +102,7 @@ spinner.update({
 })
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .clear()
-      </code>
-    </b>
-  </summary>
+__`.clear()`__
 
 Clears the spinner`s output
 
@@ -181,24 +110,13 @@ Clears the spinner`s output
 spinner.clear()
 ```
 
-</details>
-
-<details>
-  <summary>
-    <b>
-      <code>
-        .reset()
-      </code>
-    </b>
-  </summary>
+__`.reset()`__
 
 In order to reset the spinner to its initial frame do:
 
 ```js
 spinner.reset()
 ```
-
-</details>
 
 ## Roadmap
 
