@@ -64,10 +64,14 @@ function createSpinner(text = '', opts = {}) {
     },
 
     update(opts = {}) {
-      text = opts.text || text
-      frames = opts.frames && opts.frames.length ? opts.frames : frames
-      interval = opts.interval || interval
-      color = opts.color || color
+      if (typeof opts === 'string') {
+        text = opts
+      } else {
+        text = opts.text || text
+        frames = opts.frames && opts.frames.length ? opts.frames : frames
+        interval = opts.interval || interval
+        color = opts.color || color
+      }
 
       if (frames.length - 1 < current) {
         current = 0
