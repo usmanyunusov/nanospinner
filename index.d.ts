@@ -12,6 +12,7 @@ interface Spinner {
   warn(opts?: { text?: string; mark?: string }): Spinner
   stop(opts?: { text?: string; mark?: string; color?: string }): Spinner
   start(opts?: { text?: string; color?: string }): Spinner
+  update(text?: string): Spinner
   update(opts?: Options): Spinner
   reset(): Spinner
   clear(): Spinner
