@@ -93,7 +93,8 @@ function createSpinner(text = '', opts = {}) {
 
       let mark = pico[opts.color || color](frames[current])
       let optsMark = opts.mark && opts.color ? pico[opts.color](opts.mark) : opts.mark
-      spinner.write(`${optsMark || mark} ${opts.text || text}\n`, true)
+      let update = opts.update ?? false
+      spinner.write(`${optsMark || mark} ${opts.text || text}${update ? '' : '\n'}`, true)
 
       return isTTY ? spinner.write(`\x1b[?25h`) : spinner
     },
