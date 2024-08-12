@@ -13,7 +13,7 @@ setTimeout(() => {
 ```
 
 - Only **single dependency** (picocolors).
-- It **45 times** smaller than `ora`.
+- It is **16 times** smaller than `ora`.
 - Support both CJS and ESM projects.
 - **TypeScript** type declarations included.
 
@@ -28,7 +28,7 @@ The space in `node_modules` including sub-dependencies:
 ```diff
 $ node ./test/size.js
 Data from packagephobia.com
-  ora           597 kB
+  ora           210 kB
 + nanospinner    13 kB
 ```
 
