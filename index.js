@@ -2,7 +2,7 @@ const pico = require('picocolors')
 
 const { isTTY, symbols } = require('./consts')
 
-const { green, red, yellow } = pico
+const { green, red, yellow, blue } = pico
 
 function getLines(str = '', width = 80) {
   return str
@@ -110,6 +110,11 @@ function createSpinner(text = '', opts = {}) {
 
     warn(opts = {}) {
       let mark = yellow(symbols.warn)
+      return spinner.stop({ mark, ...opts })
+    },
+
+    info(opts = {}) {
+      let mark = blue(symbols.info)
       return spinner.stop({ mark, ...opts })
     },
 

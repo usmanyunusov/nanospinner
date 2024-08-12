@@ -88,6 +88,15 @@ spinner.error()
 spinner.error({ text: 'Error!', mark: ':(' })
 ```
 
+__`.info(options?)`__
+
+Use `info` call to stop the spinning animation and replace the spinning symbol with info mark character to indicate info completion.
+
+```js
+spinner.info()
+spinner.info({ text: 'Info!', mark: 'i' })
+```
+
 __`.update(options?)`__
 
 Use `update` call to dynamically change
