@@ -118,6 +118,9 @@ function createSpinner(text = '', opts = {}) {
     },
   }
 
+  process.on('SIGINT', spinner.stop)
+  process.on('SIGTERM', spinner.stop)
+
   return spinner
 }
 
