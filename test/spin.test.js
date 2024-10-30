@@ -1,7 +1,7 @@
 let { test } = require('uvu')
 let { is } = require('uvu/assert')
 
-let { createSpinner } = require('../index.js')
+let { createSpinner } = require('../dist/index.js')
 
 let stdout = { out: '' }
 stdout.write = (symbols) => {

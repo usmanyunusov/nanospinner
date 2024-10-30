@@ -1,6 +1,6 @@
-let { createSpinner } = require('../')
+let { createSpinner } = require('../dist')
 
 let spinner = createSpinner('Run test').start()
 setTimeout(() => {
-  spinner.success()
+  spinner.info()
 }, 1000)

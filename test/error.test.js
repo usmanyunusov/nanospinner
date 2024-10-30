@@ -1,7 +1,7 @@
 let { test } = require('uvu')
 let { is } = require('uvu/assert')
 
-let { createSpinner } = require('../index.js')
+let { createSpinner } = require('../dist/index.js')
 
 let stdout = { out: '' }
 stdout.write = (symbols) => {
@@ -61,10 +61,35 @@ test('marks spinner as error with mark', () => {
   spinner.error({ mark: '!' })
 
   let snapLocal =
-    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #error\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #error\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #error\x1B[1G\x1B[2K\x1B[1G! #error\n' +
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #error\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #error\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #error\x1B[1G\x1B[2K\x1B[1G\x1B[31m!\x1B[39m #error\n' +
     '\x1B[?25h'
   let snapCI =
-    '\x1B[33m-\x1B[39m #error\n\x1B[33m-\x1B[39m #error\n\x1B[33m-\x1B[39m #error\n! #error\n'
+    '\x1B[33m-\x1B[39m #error\n' +
+    '\x1B[33m-\x1B[39m #error\n' +
+    '\x1B[33m-\x1B[39m #error\n' +
+    '\x1B[31m!\x1B[39m #error\n'
+
+  is(stdout.out, process.env.CI ? snapCI : snapLocal)
+})
+
+test('error supports string', () => {
+  let spinner = createSpinner('#error', { stream: stdout })
+
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.spin()
+  spinner.error('replace error text')
+
+  let snapLocal =
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #error\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #error\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #error\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠸\x1B[39m #error\x1B[1G\x1B[2K\x1B[1G\x1B[31m✖\x1B[39m replace error text\n' +
+    '\x1B[?25h'
+  let snapCI =
+    '\x1B[33m-\x1B[39m #error\n' +
+    '\x1B[33m-\x1B[39m #error\n' +
+    '\x1B[33m-\x1B[39m #error\n' +
+    '\x1B[33m-\x1B[39m #error\n' +
+    '\x1B[31m✖\x1B[39m replace error text\n'
 
   is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })

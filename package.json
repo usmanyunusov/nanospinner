@@ -10,23 +10,31 @@
     "loading"
   ],
   "author": "Usman Yunusov",
-  "license": "ISC",
+  "license": "MIT",
   "repository": "usmanyunusov/nanospinner",
-  "types": "./index.d.ts",
-  "main": "./index.js",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
   "scripts": {
+    "build": "tsc",
     "unit": "uvu test .test.js$",
-    "test": "c8 pnpm unit"
+    "test": "c8 pnpm unit",
+    "format": "prettier --write src",
+    "publish": "clean-publish"
   },
   "dependencies": {
-    "picocolors": "^1.0.0"
+    "picocolors": "^1.1.1"
   },
   "devDependencies": {
-    "c8": "^7.11.2",
-    "clean-publish": "^3.4.5",
-    "prettier": "^2.6.2",
-    "uvu": "^0.5.3"
+    "@types/node": "^22.8.4",
+    "c8": "^10.1.2",
+    "clean-publish": "^5.1.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "uvu": "^0.5.6"
   },
+  "files": [
+    "dist"
+  ],
   "benchmarkDependencies": {
     "ora": "^6.0.1"
   },
