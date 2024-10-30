@@ -20,6 +20,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Build
+        run: pnpm build
       - name: Install benchmarkDependencies
         run: npx handpick --target=devDependencies --target=benchmarkDependencies
       - name: Size benchmark
@@ -41,6 +43,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Build
+        run: pnpm build
       - name: Run demo
         run: node ./test/demo.js
         env:
@@ -62,6 +66,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Build
+        run: pnpm build
       - name: Run tests
         run: pnpm test
         env:
@@ -88,6 +94,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+      - name: Build
+        run: pnpm build
       - name: Run unit tests
         run: pnpm unit
         env:
