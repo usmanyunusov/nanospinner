@@ -12,7 +12,7 @@ interface Options {
   color?: Color
 }
 
-interface Spinner {
+export interface Spinner {
   success(opts?: { text?: string; mark?: string; update?: boolean } | string): Spinner
   error(opts?: { text?: string; mark?: string; update?: boolean } | string): Spinner
   warn(opts?: { text?: string; mark?: string; update?: boolean } | string): Spinner
