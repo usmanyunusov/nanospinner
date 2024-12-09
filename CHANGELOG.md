@@ -2,6 +2,14 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.2.1
+
+- fix isSpinning
+
+## 1.2.0
+
+- Big refactotring
+
 ## 1.1.0
 
 - Added warm method (by Konstantin Epishev)
