@@ -37,12 +37,12 @@ test('detects if spinner is spinning or not using other methods', () => {
   spinner.success()
   is(spinner.isSpinning(), false)
 
+  spinner.stop()
+  is(spinner.isSpinning(), false)
+
   spinner.start()
   spinner.clear()
   is(spinner.isSpinning(), true)
-
-  spinner.stop()
-  is(spinner.isSpinning(), false)
 })
 
 test.run()

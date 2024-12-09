@@ -122,15 +122,15 @@ export function createSpinner(text = '', opts: Options = {}) {
     },
 
     start(opts = {}) {
-      spinning = true
       timer && spinner.reset()
+      spinning = true
       mountProcessEvents()
       return spinner.update({ text: getText(opts), color: getColor(opts) }).loop()
     },
 
     stop(opts = {}) {
       spinning = false
-
+      
       clearTimeout(timer)
       cleanupProcessEvents()
 
