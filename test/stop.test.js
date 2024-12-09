@@ -21,10 +21,8 @@ test(`doesn't reprint stop message`, () => {
   spinner.stop()
 
   let snapLocal =
-    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #stop\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠸\x1B[39m #stop\n' +
-    '\x1B[?25h'
-  let snapCI =
-    '\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n'
+    '\x1B[?25l\x1B[1G\x1B[33m⠋\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠙\x1B[39m #stop\x1B[?25l\x1B[1G\x1B[2K\x1B[1G\x1B[33m⠹\x1B[39m #stop\x1B[1G\x1B[2K\x1B[1G\x1B[?25h'
+  let snapCI = '\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n\x1B[33m-\x1B[39m #stop\n'
 
   is(stdout.out, process.env.CI ? snapCI : snapLocal)
 })

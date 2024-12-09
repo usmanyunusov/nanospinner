@@ -44,7 +44,7 @@ export function createSpinner(text = '', opts: Options = {}) {
     color: Color = opts.color || 'yellow',
     spinning = false,
     lines = 0,
-    timer: NodeJS.Timeout,
+    timer: NodeJS.Timeout | undefined = undefined,
     getText = (opts: string | { text?: string } = {}) =>
       typeof opts === 'string' ? opts : opts.text || text,
     getUpdate = (opts: string | { update?: boolean } = {}) =>
@@ -68,6 +68,7 @@ export function createSpinner(text = '', opts: Options = {}) {
       lines = 0
       spinning = false
       clearTimeout(timer)
+      timer = undefined
       return spinner
     },
 
@@ -128,17 +129,18 @@ export function createSpinner(text = '', opts: Options = {}) {
       return spinner.update({ text: getText(opts), color: getColor(opts) }).loop()
     },
 
-    stop(opts = {}) {
+    stop(opts) {
       spinning = false
-      
       clearTimeout(timer)
+      timer = undefined
       cleanupProcessEvents()
 
+      const update = getUpdate(opts)
       const mark = pc[getColor(opts)](getMark(opts, frames[current]))
       const text = getText(opts)
-      const update = getUpdate(opts)
 
-      spinner.write(`${mark} ${text}${update ? '' : '\n'}`, true)
+      spinner.write(opts ? `${mark} ${text}${update ? '' : '\n'}` : '', true)
+
       return isTTY && !update ? spinner.write(`\x1b[?25h`) : spinner
     },
 
